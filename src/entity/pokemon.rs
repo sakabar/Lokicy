@@ -1,3 +1,4 @@
+#[derive(Copy, Clone, Debug)]
 pub enum PokemonType {
     Normal,
     Fire,
@@ -19,7 +20,7 @@ pub enum PokemonType {
     Fairy,
 }
 
-type Pt = PokemonType;
+pub type Pt = PokemonType;
 
 pub const ALL_POKEMON_TYPES: [PokemonType; 18] = [
     Pt::Normal,
@@ -219,4 +220,23 @@ pub fn calc_matchup_rate(att: &PokemonType, def: &PokemonType) -> f64 {
             _ => 1.0,
         },
     };
+}
+
+#[test]
+fn it_works() {
+    let att = Pt::Ground;
+    let defs = [Pt::Electric, Pt::Steel];
+    let actual = calc_type_combination_matchup_rate(&att, &defs);
+
+    assert_eq!(actual, 4.0);
+}
+
+pub fn calc_type_combination_matchup_rate(att: &PokemonType, defs: &[PokemonType]) -> f64 {
+    let mut ans: f64 = 1.0;
+
+    for def in defs {
+        ans *= calc_matchup_rate(att, def);
+    }
+
+    return ans;
 }

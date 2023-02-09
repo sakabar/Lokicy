@@ -6,6 +6,7 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+itertools = "0.10.5"
 
 [[bin]]
 name = "main"
@@ -14,3 +15,7 @@ path = "src/interface/controller/main.rs"
 [[bin]]
 name = "show_matchup_rate_table"
 path = "src/interface/controller/show_matchup_rate_table.rs"
+
+[[bin]]
+name = "show_all_possible_selections"
+path = "src/interface/controller/show_all_possible_selections.rs"
