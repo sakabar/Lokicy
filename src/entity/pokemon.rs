@@ -1,6 +1,4 @@
-use std::fmt;
-
-#[derive(Copy, Clone, Debug)]
+#[derive(Clone, Debug)]
 pub enum PokemonType {
     Normal,
     Fire,
@@ -205,7 +203,7 @@ impl PokemonType {
 
 pub type Pt = PokemonType;
 
-#[derive(Copy, Clone, Debug)]
+#[derive(Clone, Debug)]
 pub enum PokemonTypeAbility {
     Levitate,
     SapSipper,
@@ -269,11 +267,27 @@ pub const ALL_POKEMON_TYPES: [PokemonType; 18] = [
     Pt::Fairy,
 ];
 
-pub fn calc_type_combination_matchup_rate(att: &PokemonType, defs: &Vec<Box<dyn MetaType>>) -> f64 {
+// Enum Wrapper Pattern
+#[derive(Clone, Debug)]
+pub enum MetaType {
+    Mpt(PokemonType),
+    Mpta(PokemonTypeAbility),
+}
+
+impl MetaType {
+    pub fn calc_matchup_rate(&self, att: &PokemonType) -> f64 {
+        match self {
+            MetaType::Mpt(def) => def.calc_matchup_rate(att),
+            MetaType::Mpta(def) => def.calc_matchup_rate(att),
+        }
+    }
+}
+
+pub fn calc_type_combination_matchup_rate(att: &PokemonType, defs: &Vec<MetaType>) -> f64 {
     let mut ans: f64 = 1.0;
 
-    for def in defs.iter() {
-        ans *= def.calc_matchup_rate(att);
+    for meta_def in defs.iter() {
+        ans *= meta_def.calc_matchup_rate(att);
     }
 
     return ans;
@@ -282,7 +296,7 @@ pub fn calc_type_combination_matchup_rate(att: &PokemonType, defs: &Vec<Box<dyn 
 #[test]
 fn it_works_for_pokemon_type() {
     let att = Pt::Ground;
-    let defs: [Metatype] = [Pt::Electric, Pt::Steel];
+    let defs: Vec<MetaType> = vec![MetaType::Mpt(Pt::Electric), MetaType::Mpt(Pt::Steel)];
     let actual = calc_type_combination_matchup_rate(&att, &defs);
 
     assert_eq!(actual, 4.0);
@@ -291,41 +305,10 @@ fn it_works_for_pokemon_type() {
 #[test]
 fn it_works_for_pokemon_type_ability() {
     let att = Pt::Ground;
-    let defs: [Metatype] = [Pt::Electric, Pt::Steel, Pta::EarthEater];
+    let defs: Vec<MetaType> = vec![MetaType::Mpt(Pt::Electric), MetaType::Mpt(Pt::Steel), MetaType::Mpta(Pta::EarthEater)];
     let actual = calc_type_combination_matchup_rate(&att, &defs);
 
     assert_eq!(actual, 0.0);
-}
-
-pub trait MetaType {
-    fn calc_matchup_rate(&self, att: &PokemonType) -> f64;
-    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result;
-}
-
-impl MetaType for PokemonType {
-    fn calc_matchup_rate(&self, att: &PokemonType) -> f64 {
-        self.calc_matchup_rate(att)
-    }
-
-    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        write!(f, "{:?}", self)
-    }
-}
-
-impl fmt::Debug for dyn MetaType {
-    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        self.fmt(f)
-    }
-}
-
-impl MetaType for PokemonTypeAbility {
-    fn calc_matchup_rate(&self, att: &PokemonType) -> f64 {
-        self.calc_matchup_rate(att)
-    }
-
-    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        write!(f, "{:?}", self)
-    }
 }
 
 // #[derive(Debug)]

@@ -1,38 +1,34 @@
 use itertools::Itertools;
 use lokicy::entity::pokemon;
 use lokicy::entity::pokemon::MetaType;
+use lokicy::entity::pokemon::MetaType::Mpt;
+use lokicy::entity::pokemon::MetaType::Mpta;
 use lokicy::entity::pokemon::Pt;
+use lokicy::entity::pokemon::Pta;
 
 fn main() {
-    let fixed_selection = [vec![Pt::Grass, Pt::Ice]];
+    let fixed_selection: Vec<Vec<MetaType>> = vec![vec![Mpt(Pt::Grass), Mpt(Pt::Ice)]];
 
-    let others = [
-        vec![Pt::Grass, Pt::Poison],
-        vec![Pt::Electric, Pt::Steel],
-        vec![Pt::Bug, Pt::Fighting],
-        vec![Pt::Water, Pt::Flying],
-        vec![Pt::Ground, Pt::Fighting],
+    let others: Vec<Vec<MetaType>> = vec![
+        vec![Mpt(Pt::Grass), Mpt(Pt::Poison)],
+        vec![Mpt(Pt::Electric), Mpt(Pt::Steel)],
+        vec![Mpt(Pt::Bug), Mpt(Pt::Fighting), Mpta(Pta::Levitate)],
+        vec![Mpt(Pt::Water), Mpt(Pt::Flying)],
+        vec![Mpt(Pt::Ground), Mpt(Pt::Fighting)],
     ];
 
     let mut answers = Vec::new();
 
     for other_selection in others.iter().combinations(3 - fixed_selection.len()) {
-        let mut selection: Vec<Vec<Box<dyn MetaType>>> = Vec::new();
-        let mut f: Vec<Vec<Box<dyn MetaType>>> = fixed_selection
+        let mut selection: Vec<Vec<MetaType>> = Vec::new();
+        let mut f: Vec<Vec<MetaType>> = fixed_selection
             .iter()
-            .map(|v| {
-                v.iter()
-                    .map(|&t| Box::new(t) as Box<dyn MetaType>)
-                    .collect()
-            })
+            .map(|v| v.iter().map(|t| t.clone()).collect())
             .collect();
-        let mut o: Vec<Vec<Box<dyn MetaType>>> = other_selection
+
+        let mut o: Vec<Vec<MetaType>> = other_selection
             .iter()
-            .map(|v| {
-                v.iter()
-                    .map(|&t| Box::new(t) as Box<dyn MetaType>)
-                    .collect()
-            })
+            .map(|v| v.iter().map(|t| t.clone()).collect())
             .collect();
 
         selection.append(&mut f);
