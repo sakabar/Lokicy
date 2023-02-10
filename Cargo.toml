@@ -19,3 +19,7 @@ path = "src/interface/controller/show_matchup_rate_table.rs"
 [[bin]]
 name = "show_all_possible_selections"
 path = "src/interface/controller/show_all_possible_selections.rs"
+
+[[bin]]
+name = "calc_damage_to_env_pokes"
+path = "src/interface/controller/calc_damage_to_env_pokes.rs"

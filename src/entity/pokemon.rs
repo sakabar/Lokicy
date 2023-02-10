@@ -1,4 +1,4 @@
-#[derive(Clone, Debug)]
+#[derive(Copy, Clone, Debug, PartialEq)]
 pub enum PokemonType {
     Normal,
     Fire,
@@ -138,8 +138,9 @@ impl PokemonType {
 
 pub type Pt = PokemonType;
 
-#[derive(Clone, Debug)]
+#[derive(Copy, Clone, Debug, PartialEq)]
 pub enum PokemonTypeAbility {
+    None,
     Levitate,
     SapSipper,
     VoltAbsorb,
@@ -151,6 +152,7 @@ pub enum PokemonTypeAbility {
 impl PokemonTypeAbility {
     pub fn calc_matchup_rate(&self, att: &PokemonType) -> f64 {
         return match &self {
+            Pta::None => 1.0,
             Pta::Levitate => match att {
                 Pt::Ground => 0.0,
                 _ => 1.0,
@@ -203,7 +205,7 @@ pub const ALL_POKEMON_TYPES: [PokemonType; 18] = [
 ];
 
 // Enum Wrapper Pattern
-#[derive(Clone, Debug)]
+#[derive(Copy, Clone, Debug, PartialEq)]
 pub enum MetaType {
     Mpt(PokemonType),
     Mpta(PokemonTypeAbility),
@@ -250,8 +252,144 @@ fn it_works_for_pokemon_type_ability() {
     assert_eq!(actual, 0.0);
 }
 
-// #[derive(Debug)]
-// struct PokemonClass {
-//     no: u8,
-//     pt1: PokemonType,
-// }
+#[derive(Copy, Clone, Debug, PartialEq)]
+pub struct PokemonClass {
+    no: u16,
+    elm1: MetaType,
+    elm2: MetaType,
+    meta_elm: MetaType,
+}
+
+impl PokemonClass {
+    pub fn new(no: u16, elm1: MetaType, elm2: MetaType, meta_elm: MetaType) -> Self {
+        Self {
+            no,
+            elm1,
+            elm2,
+            meta_elm,
+        }
+    }
+}
+
+#[derive(Debug)]
+pub struct PokemonInstance {
+    poke_cls: PokemonClass,
+    hit_point: i32,
+    attack: i32,
+    defence: i32,
+    special_attack: i32,
+    special_defence: i32,
+    speed: i32,
+    comment: String,
+}
+
+impl PokemonInstance {
+    pub fn new(
+        poke_cls: PokemonClass,
+        hit_point: i32,
+        attack: i32,
+        defence: i32,
+        special_attack: i32,
+        special_defence: i32,
+        speed: i32,
+        comment: String,
+    ) -> Self {
+        Self {
+            poke_cls,
+            hit_point,
+            attack,
+            defence,
+            special_attack,
+            special_defence,
+            speed,
+            comment,
+        }
+    }
+
+    pub fn calc_type_combination_matchup_rate(&self, att: &PokemonType) -> f64 {
+        let elms = vec![
+            self.poke_cls.elm1,
+            self.poke_cls.elm2,
+            self.poke_cls.meta_elm,
+        ];
+        calc_type_combination_matchup_rate(att, &elms)
+    }
+
+    pub fn get_comment(&self) -> &str {
+        &self.comment
+    }
+
+    pub fn get_offensive_index<'a>(&'a self, mv: &'a Move) -> (&MoveType, f64) {
+        let mt = mv.get_move_type();
+        let val = match mt {
+            MoveType::Physical => (self.attack * mv.get_power()) as f64,
+            MoveType::Special => (self.special_attack * mv.get_power()) as f64,
+            MoveType::Status => 0.0,
+        };
+
+        let r = if (MetaType::Mpt(*mv.get_poke_type())) == self.poke_cls.elm1
+            || (MetaType::Mpt(*mv.get_poke_type())) == self.poke_cls.elm2
+        {
+            1.5
+        } else {
+            1.0
+        };
+
+        return (mt, val * r);
+    }
+
+    pub fn get_defensive_index(&self, move_type: &MoveType) -> f64 {
+        match move_type {
+            MoveType::Physical => (self.hit_point * self.defence) as f64,
+            MoveType::Special => (self.hit_point * self.special_defence) as f64,
+            MoveType::Status => 1.0,
+        }
+    }
+}
+
+pub enum MoveType {
+    Physical,
+    Special,
+    Status,
+}
+
+pub struct Move {
+    name: String,
+    poke_type: PokemonType,
+    move_type: MoveType,
+    pp: u8,
+    power: i32,
+    accuracy: f64,
+}
+
+impl Move {
+    pub fn new(
+        name: &str,
+        poke_type: PokemonType,
+        move_type: MoveType,
+        pp: u8,
+        power: i32,
+        accuracy: f64,
+    ) -> Self {
+        Self {
+            name: name.to_string(),
+            poke_type,
+            move_type,
+            pp,
+            power,
+            accuracy,
+        }
+    }
+
+    pub fn get_poke_type(&self) -> &PokemonType {
+        &self.poke_type
+    }
+
+    pub fn get_move_type(&self) -> &MoveType {
+        &self.move_type
+    }
+
+    pub fn get_power(&self) -> i32 {
+        self.power
+    }
+}
