@@ -3,7 +3,7 @@ use lokicy::entity::pokemon;
 fn main() {
     for att in pokemon::ALL_POKEMON_TYPES {
         for def in pokemon::ALL_POKEMON_TYPES {
-            let matchup_rate = pokemon::calc_matchup_rate(&att, &def);
+            let matchup_rate = def.calc_matchup_rate(&att);
 
             let ch = if matchup_rate == 2.0 {
                 'O'

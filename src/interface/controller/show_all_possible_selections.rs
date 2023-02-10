@@ -1,24 +1,40 @@
 use itertools::Itertools;
 use lokicy::entity::pokemon;
+use lokicy::entity::pokemon::MetaType;
 use lokicy::entity::pokemon::Pt;
 
 fn main() {
-    let fixed_selection = [[Pt::Grass, Pt::Ice]];
+    let fixed_selection = [vec![Pt::Grass, Pt::Ice]];
 
     let others = [
-        [Pt::Grass, Pt::Poison],
-        [Pt::Electric, Pt::Steel],
-        [Pt::Bug, Pt::Fighting],
-        [Pt::Water, Pt::Flying],
-        [Pt::Ground, Pt::Fighting],
+        vec![Pt::Grass, Pt::Poison],
+        vec![Pt::Electric, Pt::Steel],
+        vec![Pt::Bug, Pt::Fighting],
+        vec![Pt::Water, Pt::Flying],
+        vec![Pt::Ground, Pt::Fighting],
     ];
 
     let mut answers = Vec::new();
 
     for other_selection in others.iter().combinations(3 - fixed_selection.len()) {
-        let mut selection: Vec<[Pt; 2]> = Vec::new();
-        let mut f: Vec<[Pt; 2]> = fixed_selection.to_vec();
-        let mut o: Vec<[Pt; 2]> = other_selection.iter().map(|&p| p.clone()).collect();
+        let mut selection: Vec<Vec<Box<dyn MetaType>>> = Vec::new();
+        let mut f: Vec<Vec<Box<dyn MetaType>>> = fixed_selection
+            .iter()
+            .map(|v| {
+                v.iter()
+                    .map(|&t| Box::new(t) as Box<dyn MetaType>)
+                    .collect()
+            })
+            .collect();
+        let mut o: Vec<Vec<Box<dyn MetaType>>> = other_selection
+            .iter()
+            .map(|v| {
+                v.iter()
+                    .map(|&t| Box::new(t) as Box<dyn MetaType>)
+                    .collect()
+            })
+            .collect();
+
         selection.append(&mut f);
         selection.append(&mut o);
         println!("selection: {:?}", &selection);
