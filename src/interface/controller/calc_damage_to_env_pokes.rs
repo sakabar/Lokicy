@@ -1,18 +1,18 @@
 use itertools::Itertools;
 use lokicy::entity::pokemon;
-use lokicy::entity::pokemon::MetaType::Mbe as Mpt;
-use lokicy::entity::pokemon::MetaType::Mae as Mpta;
+use lokicy::entity::pokemon::MetaType::Mbe;
+use lokicy::entity::pokemon::MetaType::Mae;
 use lokicy::entity::pokemon::Move;
 use lokicy::entity::pokemon::MoveType;
 use lokicy::entity::pokemon::PokemonClass;
 use lokicy::entity::pokemon::PokemonInstance;
-use lokicy::entity::pokemon::BasicElement as Pt;
-use lokicy::entity::pokemon::AbilityElement as Pta;
+use lokicy::entity::pokemon::BasicElement as Be;
+use lokicy::entity::pokemon::AbilityElement as Ae;
 
 fn main() {
     let yakemons: Vec<PokemonInstance> = vec![
         PokemonInstance::new(
-            PokemonClass::new(637, Mpt(Pt::Bug), Mpt(Pt::Fire), Mpta(Pta::None)),
+            PokemonClass::new(637, Mbe(Be::Bug), Mbe(Be::Fire), Mae(Ae::None)),
             191,
             72,
             85,
@@ -22,7 +22,7 @@ fn main() {
             "ウルガモス".to_string(),
         ),
         PokemonInstance::new(
-            PokemonClass::new(130, Mpt(Pt::Water), Mpt(Pt::Flying), Mpta(Pta::None)),
+            PokemonClass::new(130, Mbe(Be::Water), Mbe(Be::Flying), Mae(Ae::None)),
             202,
             194,
             99,
@@ -32,7 +32,7 @@ fn main() {
             "ギャラドス".to_string(),
         ),
         PokemonInstance::new(
-            PokemonClass::new(713, Mpt(Pt::Ice), Mpta(Pta::None), Mpta(Pta::None)),
+            PokemonClass::new(713, Mbe(Be::Ice), Mae(Ae::None), Mae(Ae::None)),
             202,
             185,
             205,
@@ -42,7 +42,7 @@ fn main() {
             "クレベース".to_string(),
         ),
         PokemonInstance::new(
-            PokemonClass::new(936, Mpt(Pt::Fire), Mpt(Pt::Psychic), Mpta(Pta::FlashFire)),
+            PokemonClass::new(936, Mbe(Be::Fire), Mbe(Be::Psychic), Mae(Ae::FlashFire)),
             191,
             72,
             122,
@@ -52,7 +52,7 @@ fn main() {
             "グレンアルマ".to_string(),
         ),
         PokemonInstance::new(
-            PokemonClass::new(128, Mpt(Pt::Fighting), Mpt(Pt::Fire), Mpta(Pta::None)),
+            PokemonClass::new(128, Mbe(Be::Fighting), Mbe(Be::Fire), Mae(Ae::None)),
             182,
             178,
             126,
@@ -62,7 +62,7 @@ fn main() {
             "ケンタロス(炎)".to_string(),
         ),
         PokemonInstance::new(
-            PokemonClass::new(128, Mpt(Pt::Fighting), Mpt(Pt::Water), Mpta(Pta::None)),
+            PokemonClass::new(128, Mbe(Be::Fighting), Mbe(Be::Water), Mae(Ae::None)),
             182,
             178,
             126,
@@ -72,7 +72,7 @@ fn main() {
             "ケンタロス(水)".to_string(),
         ),
         PokemonInstance::new(
-            PokemonClass::new(1000, Mpt(Pt::Steel), Mpt(Pt::Ghost), Mpta(Pta::None)),
+            PokemonClass::new(1000, Mbe(Be::Steel), Mbe(Be::Ghost), Mae(Ae::None)),
             194,
             58,
             116,
@@ -82,7 +82,7 @@ fn main() {
             "サーフゴー".to_string(),
         ),
         PokemonInstance::new(
-            PokemonClass::new(635, Mpt(Pt::Dark), Mpt(Pt::Dragon), Mpta(Pta::Levitate)),
+            PokemonClass::new(635, Mbe(Be::Dark), Mbe(Be::Dragon), Mae(Ae::Levitate)),
             199,
             112,
             111,
@@ -96,7 +96,7 @@ fn main() {
 
     let bokemons: Vec<PokemonInstance> = vec![
         PokemonInstance::new(
-            PokemonClass::new(149, Mpt(Pt::Dragon), Mpt(Pt::Flying), Mpta(Pta::None)),
+            PokemonClass::new(149, Mbe(Be::Dragon), Mbe(Be::Flying), Mae(Ae::None)),
             198,
             204,
             115,
@@ -106,7 +106,7 @@ fn main() {
             "カイリューHA".to_string(),
         ),
         PokemonInstance::new(
-            PokemonClass::new(149, Mpt(Pt::Normal), Mpta(Pta::None), Mpta(Pta::None)),
+            PokemonClass::new(149, Mbe(Be::Normal), Mae(Ae::None), Mae(Ae::None)),
             198,
             204,
             115,
@@ -126,8 +126,8 @@ fn main() {
         let mut answers = vec![];
         for yakemon in yakemons.iter() {
             // 今は仮に、全員ゆきなだれのみとする
-            // let aqua_tail = Move::new("アクアテール", Pt::Water, MoveType::Physical, 10, 90, 0.95);
-            let mv = Move::new("ゆきなだれ", Pt::Ice, MoveType::Physical, 10, 60, 1.0);
+            // let aqua_tail = Move::new("アクアテール", Be::Water, MoveType::Physical, 10, 90, 0.95);
+            let mv = Move::new("ゆきなだれ", Be::Ice, MoveType::Physical, 10, 60, 1.0);
 
             let (mt, offensive_index) = yakemon.get_offensive_index(&mv);
             let defensive_index = bokemon.get_defensive_index(mt);
