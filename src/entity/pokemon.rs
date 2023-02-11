@@ -1,5 +1,5 @@
 #[derive(Copy, Clone, Debug, PartialEq)]
-pub enum PokemonType {
+pub enum BasicElement {
     Normal,
     Fire,
     Water,
@@ -20,126 +20,126 @@ pub enum PokemonType {
     Fairy,
 }
 
-impl PokemonType {
-    pub fn calc_matchup_rate(&self, att: &PokemonType) -> f64 {
+impl BasicElement {
+    pub fn calc_matchup_rate(&self, att: &BasicElement) -> f64 {
         return match att {
-            Pt::Normal => match &self {
-                Pt::Rock | Pt::Steel => 0.5,
-                Pt::Ghost => 0.0,
+            Be::Normal => match &self {
+                Be::Rock | Be::Steel => 0.5,
+                Be::Ghost => 0.0,
                 _ => 1.0,
             },
-            Pt::Fire => match &self {
-                Pt::Grass | Pt::Ice | Pt::Bug | Pt::Steel => 2.0,
-                Pt::Fire | Pt::Water | Pt::Rock | Pt::Dragon => 0.5,
+            Be::Fire => match &self {
+                Be::Grass | Be::Ice | Be::Bug | Be::Steel => 2.0,
+                Be::Fire | Be::Water | Be::Rock | Be::Dragon => 0.5,
                 _ => 1.0,
             },
-            Pt::Water => match &self {
-                Pt::Fire | Pt::Ground | Pt::Rock => 2.0,
-                Pt::Water | Pt::Grass | Pt::Dragon => 0.5,
+            Be::Water => match &self {
+                Be::Fire | Be::Ground | Be::Rock => 2.0,
+                Be::Water | Be::Grass | Be::Dragon => 0.5,
                 _ => 1.0,
             },
-            Pt::Electric => match &self {
-                Pt::Water | Pt::Flying => 2.0,
-                Pt::Electric | Pt::Grass | Pt::Dragon => 0.5,
-                Pt::Ground => 0.0,
+            Be::Electric => match &self {
+                Be::Water | Be::Flying => 2.0,
+                Be::Electric | Be::Grass | Be::Dragon => 0.5,
+                Be::Ground => 0.0,
                 _ => 1.0,
             },
-            Pt::Grass => match &self {
-                Pt::Water | Pt::Ground | Pt::Rock => 2.0,
-                Pt::Fire
-                | Pt::Grass
-                | Pt::Poison
-                | Pt::Flying
-                | Pt::Bug
-                | Pt::Dragon
-                | Pt::Steel => 0.5,
+            Be::Grass => match &self {
+                Be::Water | Be::Ground | Be::Rock => 2.0,
+                Be::Fire
+                | Be::Grass
+                | Be::Poison
+                | Be::Flying
+                | Be::Bug
+                | Be::Dragon
+                | Be::Steel => 0.5,
                 _ => 1.0,
             },
-            Pt::Ice => match &self {
-                Pt::Grass | Pt::Ground | Pt::Flying | Pt::Dragon => 2.0,
-                Pt::Fire | Pt::Water | Pt::Ice | Pt::Steel => 0.5,
+            Be::Ice => match &self {
+                Be::Grass | Be::Ground | Be::Flying | Be::Dragon => 2.0,
+                Be::Fire | Be::Water | Be::Ice | Be::Steel => 0.5,
                 _ => 1.0,
             },
-            Pt::Fighting => match &self {
-                Pt::Normal | Pt::Ice | Pt::Rock | Pt::Dark | Pt::Steel => 2.0,
-                Pt::Poison | Pt::Flying | Pt::Psychic | Pt::Bug | Pt::Fairy => 0.5,
-                Pt::Ghost => 0.0,
+            Be::Fighting => match &self {
+                Be::Normal | Be::Ice | Be::Rock | Be::Dark | Be::Steel => 2.0,
+                Be::Poison | Be::Flying | Be::Psychic | Be::Bug | Be::Fairy => 0.5,
+                Be::Ghost => 0.0,
                 _ => 1.0,
             },
-            Pt::Poison => match &self {
-                Pt::Grass | Pt::Fairy => 2.0,
-                Pt::Poison | Pt::Ground | Pt::Rock | Pt::Ghost => 0.5,
-                Pt::Steel => 0.0,
+            Be::Poison => match &self {
+                Be::Grass | Be::Fairy => 2.0,
+                Be::Poison | Be::Ground | Be::Rock | Be::Ghost => 0.5,
+                Be::Steel => 0.0,
                 _ => 1.0,
             },
-            Pt::Ground => match &self {
-                Pt::Fire | Pt::Electric | Pt::Poison | Pt::Rock | Pt::Steel => 2.0,
-                Pt::Grass | Pt::Bug => 0.5,
-                Pt::Flying => 0.0,
+            Be::Ground => match &self {
+                Be::Fire | Be::Electric | Be::Poison | Be::Rock | Be::Steel => 2.0,
+                Be::Grass | Be::Bug => 0.5,
+                Be::Flying => 0.0,
                 _ => 1.0,
             },
-            Pt::Flying => match &self {
-                Pt::Grass | Pt::Fighting | Pt::Bug => 2.0,
-                Pt::Electric | Pt::Rock | Pt::Steel => 0.5,
+            Be::Flying => match &self {
+                Be::Grass | Be::Fighting | Be::Bug => 2.0,
+                Be::Electric | Be::Rock | Be::Steel => 0.5,
                 _ => 1.0,
             },
-            Pt::Psychic => match &self {
-                Pt::Fighting | Pt::Poison => 2.0,
-                Pt::Psychic | Pt::Steel => 0.5,
-                Pt::Dark => 0.0,
+            Be::Psychic => match &self {
+                Be::Fighting | Be::Poison => 2.0,
+                Be::Psychic | Be::Steel => 0.5,
+                Be::Dark => 0.0,
                 _ => 1.0,
             },
-            Pt::Bug => match &self {
-                Pt::Grass | Pt::Psychic | Pt::Dark => 2.0,
-                Pt::Fire
-                | Pt::Fighting
-                | Pt::Poison
-                | Pt::Flying
-                | Pt::Ghost
-                | Pt::Steel
-                | Pt::Fairy => 0.5,
+            Be::Bug => match &self {
+                Be::Grass | Be::Psychic | Be::Dark => 2.0,
+                Be::Fire
+                | Be::Fighting
+                | Be::Poison
+                | Be::Flying
+                | Be::Ghost
+                | Be::Steel
+                | Be::Fairy => 0.5,
                 _ => 1.0,
             },
-            Pt::Rock => match &self {
-                Pt::Fire | Pt::Ice | Pt::Flying | Pt::Bug => 2.0,
-                Pt::Fighting | Pt::Ground | Pt::Steel => 0.5,
+            Be::Rock => match &self {
+                Be::Fire | Be::Ice | Be::Flying | Be::Bug => 2.0,
+                Be::Fighting | Be::Ground | Be::Steel => 0.5,
                 _ => 1.0,
             },
-            Pt::Ghost => match &self {
-                Pt::Psychic | Pt::Ghost => 2.0,
-                Pt::Dark => 0.5,
-                Pt::Normal => 0.0,
+            Be::Ghost => match &self {
+                Be::Psychic | Be::Ghost => 2.0,
+                Be::Dark => 0.5,
+                Be::Normal => 0.0,
                 _ => 1.0,
             },
-            Pt::Dragon => match &self {
-                Pt::Dragon => 2.0,
-                Pt::Steel => 0.5,
-                Pt::Fairy => 0.0,
+            Be::Dragon => match &self {
+                Be::Dragon => 2.0,
+                Be::Steel => 0.5,
+                Be::Fairy => 0.0,
                 _ => 1.0,
             },
-            Pt::Dark => match &self {
-                Pt::Psychic | Pt::Ghost => 2.0,
-                Pt::Fighting | Pt::Dark | Pt::Fairy => 0.5,
+            Be::Dark => match &self {
+                Be::Psychic | Be::Ghost => 2.0,
+                Be::Fighting | Be::Dark | Be::Fairy => 0.5,
                 _ => 1.0,
             },
-            Pt::Steel => match &self {
-                Pt::Ice | Pt::Rock | Pt::Fairy => 2.0,
-                Pt::Fire | Pt::Water | Pt::Electric | Pt::Steel => 0.5,
+            Be::Steel => match &self {
+                Be::Ice | Be::Rock | Be::Fairy => 2.0,
+                Be::Fire | Be::Water | Be::Electric | Be::Steel => 0.5,
                 _ => 1.0,
             },
-            Pt::Fairy => match &self {
-                Pt::Fighting | Pt::Dragon | Pt::Dark => 2.0,
-                Pt::Fire | Pt::Poison | Pt::Steel => 0.5,
+            Be::Fairy => match &self {
+                Be::Fighting | Be::Dragon | Be::Dark => 2.0,
+                Be::Fire | Be::Poison | Be::Steel => 0.5,
                 _ => 1.0,
             },
         };
     }
 }
 
-pub type Pt = PokemonType;
+type Be = BasicElement;
 
 #[derive(Copy, Clone, Debug, PartialEq)]
-pub enum PokemonTypeAbility {
+pub enum AbilityElement {
     None,
     Levitate,
     SapSipper,
@@ -149,78 +149,78 @@ pub enum PokemonTypeAbility {
     FlashFire,
 }
 
-impl PokemonTypeAbility {
-    pub fn calc_matchup_rate(&self, att: &PokemonType) -> f64 {
+type Ae = AbilityElement;
+
+impl AbilityElement {
+    pub fn calc_matchup_rate(&self, att: &BasicElement) -> f64 {
         return match &self {
-            Pta::None => 1.0,
-            Pta::Levitate => match att {
-                Pt::Ground => 0.0,
+            Ae::None => 1.0,
+            Ae::Levitate => match att {
+                Be::Ground => 0.0,
                 _ => 1.0,
             },
-            Pta::SapSipper => match att {
-                Pt::Grass => 0.0,
+            Ae::SapSipper => match att {
+                Be::Grass => 0.0,
                 _ => 1.0,
             },
-            Pta::VoltAbsorb => match att {
-                Pt::Electric => 0.0,
+            Ae::VoltAbsorb => match att {
+                Be::Electric => 0.0,
                 _ => 1.0,
             },
-            Pta::WaterAbsorb => match att {
-                Pt::Water => 0.0,
+            Ae::WaterAbsorb => match att {
+                Be::Water => 0.0,
                 _ => 1.0,
             },
-            Pta::EarthEater => match att {
-                Pt::Ground => 0.0,
+            Ae::EarthEater => match att {
+                Be::Ground => 0.0,
                 _ => 1.0,
             },
-            Pta::FlashFire => match att {
-                Pt::Fire => 0.0,
+            Ae::FlashFire => match att {
+                Be::Fire => 0.0,
                 _ => 1.0,
             },
         };
     }
 }
 
-pub type Pta = PokemonTypeAbility;
-
-pub const ALL_POKEMON_TYPES: [PokemonType; 18] = [
-    Pt::Normal,
-    Pt::Fire,
-    Pt::Water,
-    Pt::Electric,
-    Pt::Grass,
-    Pt::Ice,
-    Pt::Fighting,
-    Pt::Poison,
-    Pt::Ground,
-    Pt::Flying,
-    Pt::Psychic,
-    Pt::Bug,
-    Pt::Rock,
-    Pt::Ghost,
-    Pt::Dragon,
-    Pt::Dark,
-    Pt::Steel,
-    Pt::Fairy,
+pub const ALL_POKEMON_TYPES: [BasicElement; 18] = [
+    Be::Normal,
+    Be::Fire,
+    Be::Water,
+    Be::Electric,
+    Be::Grass,
+    Be::Ice,
+    Be::Fighting,
+    Be::Poison,
+    Be::Ground,
+    Be::Flying,
+    Be::Psychic,
+    Be::Bug,
+    Be::Rock,
+    Be::Ghost,
+    Be::Dragon,
+    Be::Dark,
+    Be::Steel,
+    Be::Fairy,
 ];
 
 // Enum Wrapper Pattern
 #[derive(Copy, Clone, Debug, PartialEq)]
 pub enum MetaType {
-    Mpt(PokemonType),
-    Mpta(PokemonTypeAbility),
+    Mbe(BasicElement),
+    Mae(AbilityElement),
 }
 
 impl MetaType {
-    pub fn calc_matchup_rate(&self, att: &PokemonType) -> f64 {
+    pub fn calc_matchup_rate(&self, att: &BasicElement) -> f64 {
         match self {
-            MetaType::Mpt(def) => def.calc_matchup_rate(att),
-            MetaType::Mpta(def) => def.calc_matchup_rate(att),
+            MetaType::Mbe(def) => def.calc_matchup_rate(att),
+            MetaType::Mae(def) => def.calc_matchup_rate(att),
         }
     }
 }
 
-pub fn calc_type_combination_matchup_rate(att: &PokemonType, defs: &Vec<MetaType>) -> f64 {
+pub fn calc_type_combination_matchup_rate(att: &BasicElement, defs: &Vec<MetaType>) -> f64 {
     let mut ans: f64 = 1.0;
 
     for meta_def in defs.iter() {
@@ -232,8 +232,8 @@ pub fn calc_type_combination_matchup_rate(att: &PokemonType, defs: &Vec<MetaType
 
 #[test]
 fn it_works_for_pokemon_type() {
-    let att = Pt::Ground;
-    let defs: Vec<MetaType> = vec![MetaType::Mpt(Pt::Electric), MetaType::Mpt(Pt::Steel)];
+    let att = Be::Ground;
+    let defs: Vec<MetaType> = vec![MetaType::Mbe(Be::Electric), MetaType::Mbe(Be::Steel)];
     let actual = calc_type_combination_matchup_rate(&att, &defs);
 
     assert_eq!(actual, 4.0);
@@ -241,11 +241,11 @@ fn it_works_for_pokemon_type() {
 
 #[test]
 fn it_works_for_pokemon_type_ability() {
-    let att = Pt::Ground;
+    let att = Be::Ground;
     let defs: Vec<MetaType> = vec![
-        MetaType::Mpt(Pt::Electric),
-        MetaType::Mpt(Pt::Steel),
-        MetaType::Mpta(Pta::EarthEater),
+        MetaType::Mbe(Be::Electric),
+        MetaType::Mbe(Be::Steel),
+        MetaType::Mae(Ae::EarthEater),
     ];
     let actual = calc_type_combination_matchup_rate(&att, &defs);
 
@@ -306,7 +306,7 @@ impl PokemonInstance {
         }
     }
 
-    pub fn calc_type_combination_matchup_rate(&self, att: &PokemonType) -> f64 {
+    pub fn calc_type_combination_matchup_rate(&self, att: &BasicElement) -> f64 {
         let elms = vec![
             self.poke_cls.elm1,
             self.poke_cls.elm2,
@@ -327,8 +327,8 @@ impl PokemonInstance {
             MoveType::Status => 0.0,
         };
 
-        let r = if (MetaType::Mpt(*mv.get_poke_type())) == self.poke_cls.elm1
-            || (MetaType::Mpt(*mv.get_poke_type())) == self.poke_cls.elm2
+        let r = if (MetaType::Mbe(*mv.get_poke_type())) == self.poke_cls.elm1
+            || (MetaType::Mbe(*mv.get_poke_type())) == self.poke_cls.elm2
         {
             1.5
         } else {
@@ -355,7 +355,7 @@ pub enum MoveType {
 
 pub struct Move {
     name: String,
-    poke_type: PokemonType,
+    poke_type: BasicElement,
     move_type: MoveType,
     pp: u8,
     power: i32,
@@ -365,7 +365,7 @@ pub struct Move {
 impl Move {
     pub fn new(
         name: &str,
-        poke_type: PokemonType,
+        poke_type: BasicElement,
         move_type: MoveType,
         pp: u8,
         power: i32,
@@ -381,7 +381,7 @@ impl Move {
         }
     }
 
-    pub fn get_poke_type(&self) -> &PokemonType {
+    pub fn get_poke_type(&self) -> &BasicElement {
         &self.poke_type
     }
 

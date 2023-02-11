@@ -1,13 +1,13 @@
 use itertools::Itertools;
 use lokicy::entity::pokemon;
-use lokicy::entity::pokemon::MetaType::Mpt;
-use lokicy::entity::pokemon::MetaType::Mpta;
+use lokicy::entity::pokemon::MetaType::Mbe as Mpt;
+use lokicy::entity::pokemon::MetaType::Mae as Mpta;
 use lokicy::entity::pokemon::Move;
 use lokicy::entity::pokemon::MoveType;
 use lokicy::entity::pokemon::PokemonClass;
 use lokicy::entity::pokemon::PokemonInstance;
-use lokicy::entity::pokemon::Pt;
-use lokicy::entity::pokemon::Pta;
+use lokicy::entity::pokemon::BasicElement as Pt;
+use lokicy::entity::pokemon::AbilityElement as Pta;
 
 fn main() {
     let yakemons: Vec<PokemonInstance> = vec![
