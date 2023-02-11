@@ -1,5 +1,4 @@
-use itertools::Itertools;
-use lokicy::entity::pokemon;
+use lokicy::entity::pokemon::MetaElement::Mnone;
 use lokicy::entity::pokemon::MetaElement::Mbe;
 use lokicy::entity::pokemon::MetaElement::Mae;
 use lokicy::entity::pokemon::Move;
@@ -12,7 +11,7 @@ use lokicy::entity::pokemon::AbilityElement as Ae;
 fn main() {
     let yakemons: Vec<PokemonInstance> = vec![
         PokemonInstance::new(
-            PokemonClass::new(637, Mbe(Be::Bug), Mbe(Be::Fire), Mae(Ae::None)),
+            PokemonClass::new(637, Mbe(Be::Bug), Mbe(Be::Fire), Mnone),
             191,
             72,
             85,
@@ -22,7 +21,7 @@ fn main() {
             "ウルガモス".to_string(),
         ),
         PokemonInstance::new(
-            PokemonClass::new(130, Mbe(Be::Water), Mbe(Be::Flying), Mae(Ae::None)),
+            PokemonClass::new(130, Mbe(Be::Water), Mbe(Be::Flying), Mnone),
             202,
             194,
             99,
@@ -32,7 +31,7 @@ fn main() {
             "ギャラドス".to_string(),
         ),
         PokemonInstance::new(
-            PokemonClass::new(713, Mbe(Be::Ice), Mae(Ae::None), Mae(Ae::None)),
+            PokemonClass::new(713, Mbe(Be::Ice), Mnone, Mnone),
             202,
             185,
             205,
@@ -52,7 +51,7 @@ fn main() {
             "グレンアルマ".to_string(),
         ),
         PokemonInstance::new(
-            PokemonClass::new(128, Mbe(Be::Fighting), Mbe(Be::Fire), Mae(Ae::None)),
+            PokemonClass::new(128, Mbe(Be::Fighting), Mbe(Be::Fire), Mnone),
             182,
             178,
             126,
@@ -62,7 +61,7 @@ fn main() {
             "ケンタロス(炎)".to_string(),
         ),
         PokemonInstance::new(
-            PokemonClass::new(128, Mbe(Be::Fighting), Mbe(Be::Water), Mae(Ae::None)),
+            PokemonClass::new(128, Mbe(Be::Fighting), Mbe(Be::Water), Mnone),
             182,
             178,
             126,
@@ -72,7 +71,7 @@ fn main() {
             "ケンタロス(水)".to_string(),
         ),
         PokemonInstance::new(
-            PokemonClass::new(1000, Mbe(Be::Steel), Mbe(Be::Ghost), Mae(Ae::None)),
+            PokemonClass::new(1000, Mbe(Be::Steel), Mbe(Be::Ghost), Mnone),
             194,
             58,
             116,
@@ -96,7 +95,7 @@ fn main() {
 
     let bokemons: Vec<PokemonInstance> = vec![
         PokemonInstance::new(
-            PokemonClass::new(149, Mbe(Be::Dragon), Mbe(Be::Flying), Mae(Ae::None)),
+            PokemonClass::new(149, Mbe(Be::Dragon), Mbe(Be::Flying), Mnone),
             198,
             204,
             115,
@@ -106,7 +105,7 @@ fn main() {
             "カイリューHA".to_string(),
         ),
         PokemonInstance::new(
-            PokemonClass::new(149, Mbe(Be::Normal), Mae(Ae::None), Mae(Ae::None)),
+            PokemonClass::new(149, Mbe(Be::Normal), Mnone, Mnone),
             198,
             204,
             115,

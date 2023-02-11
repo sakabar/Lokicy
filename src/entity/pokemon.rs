@@ -140,7 +140,6 @@ type Be = BasicElement;
 
 #[derive(Copy, Clone, Debug, PartialEq)]
 pub enum AbilityElement {
-    None,
     Levitate,
     SapSipper,
     VoltAbsorb,
@@ -154,7 +153,6 @@ type Ae = AbilityElement;
 impl AbilityElement {
     pub fn calc_matchup_rate(&self, att: &BasicElement) -> f64 {
         return match &self {
-            Ae::None => 1.0,
             Ae::Levitate => match att {
                 Be::Ground => 0.0,
                 _ => 1.0,
@@ -207,6 +205,7 @@ pub const ALL_POKEMON_TYPES: [BasicElement; 18] = [
 // Enum Wrapper Pattern
 #[derive(Copy, Clone, Debug, PartialEq)]
 pub enum MetaElement {
+    Mnone,
     Mbe(BasicElement),
     Mae(AbilityElement),
 }
@@ -214,6 +213,7 @@ pub enum MetaElement {
 impl MetaElement {
     pub fn calc_matchup_rate(&self, att: &BasicElement) -> f64 {
         match self {
+            MetaElement::Mnone => 1.0,
             MetaElement::Mbe(def) => def.calc_matchup_rate(att),
             MetaElement::Mae(def) => def.calc_matchup_rate(att),
         }
