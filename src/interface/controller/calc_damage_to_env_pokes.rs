@@ -1,7 +1,7 @@
 use itertools::Itertools;
 use lokicy::entity::pokemon;
-use lokicy::entity::pokemon::MetaType::Mbe;
-use lokicy::entity::pokemon::MetaType::Mae;
+use lokicy::entity::pokemon::MetaElement::Mbe;
+use lokicy::entity::pokemon::MetaElement::Mae;
 use lokicy::entity::pokemon::Move;
 use lokicy::entity::pokemon::MoveType;
 use lokicy::entity::pokemon::PokemonClass;

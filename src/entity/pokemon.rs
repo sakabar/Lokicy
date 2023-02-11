@@ -206,21 +206,21 @@ pub const ALL_POKEMON_TYPES: [BasicElement; 18] = [
 
 // Enum Wrapper Pattern
 #[derive(Copy, Clone, Debug, PartialEq)]
-pub enum MetaType {
+pub enum MetaElement {
     Mbe(BasicElement),
     Mae(AbilityElement),
 }
 
-impl MetaType {
+impl MetaElement {
     pub fn calc_matchup_rate(&self, att: &BasicElement) -> f64 {
         match self {
-            MetaType::Mbe(def) => def.calc_matchup_rate(att),
-            MetaType::Mae(def) => def.calc_matchup_rate(att),
+            MetaElement::Mbe(def) => def.calc_matchup_rate(att),
+            MetaElement::Mae(def) => def.calc_matchup_rate(att),
         }
     }
 }
 
-pub fn calc_type_combination_matchup_rate(att: &BasicElement, defs: &Vec<MetaType>) -> f64 {
+pub fn calc_type_combination_matchup_rate(att: &BasicElement, defs: &Vec<MetaElement>) -> f64 {
     let mut ans: f64 = 1.0;
 
     for meta_def in defs.iter() {
@@ -233,7 +233,7 @@ pub fn calc_type_combination_matchup_rate(att: &BasicElement, defs: &Vec<MetaTyp
 #[test]
 fn it_works_for_pokemon_type() {
     let att = Be::Ground;
-    let defs: Vec<MetaType> = vec![MetaType::Mbe(Be::Electric), MetaType::Mbe(Be::Steel)];
+    let defs: Vec<MetaElement> = vec![MetaElement::Mbe(Be::Electric), MetaElement::Mbe(Be::Steel)];
     let actual = calc_type_combination_matchup_rate(&att, &defs);
 
     assert_eq!(actual, 4.0);
@@ -242,10 +242,10 @@ fn it_works_for_pokemon_type() {
 #[test]
 fn it_works_for_pokemon_type_ability() {
     let att = Be::Ground;
-    let defs: Vec<MetaType> = vec![
-        MetaType::Mbe(Be::Electric),
-        MetaType::Mbe(Be::Steel),
-        MetaType::Mae(Ae::EarthEater),
+    let defs: Vec<MetaElement> = vec![
+        MetaElement::Mbe(Be::Electric),
+        MetaElement::Mbe(Be::Steel),
+        MetaElement::Mae(Ae::EarthEater),
     ];
     let actual = calc_type_combination_matchup_rate(&att, &defs);
 
@@ -255,13 +255,13 @@ fn it_works_for_pokemon_type_ability() {
 #[derive(Copy, Clone, Debug, PartialEq)]
 pub struct PokemonClass {
     no: u16,
-    elm1: MetaType,
-    elm2: MetaType,
-    meta_elm: MetaType,
+    elm1: MetaElement,
+    elm2: MetaElement,
+    meta_elm: MetaElement,
 }
 
 impl PokemonClass {
-    pub fn new(no: u16, elm1: MetaType, elm2: MetaType, meta_elm: MetaType) -> Self {
+    pub fn new(no: u16, elm1: MetaElement, elm2: MetaElement, meta_elm: MetaElement) -> Self {
         Self {
             no,
             elm1,
@@ -327,8 +327,8 @@ impl PokemonInstance {
             MoveType::Status => 0.0,
         };
 
-        let r = if (MetaType::Mbe(*mv.get_poke_type())) == self.poke_cls.elm1
-            || (MetaType::Mbe(*mv.get_poke_type())) == self.poke_cls.elm2
+        let r = if (MetaElement::Mbe(*mv.get_poke_type())) == self.poke_cls.elm1
+            || (MetaElement::Mbe(*mv.get_poke_type())) == self.poke_cls.elm2
         {
             1.5
         } else {

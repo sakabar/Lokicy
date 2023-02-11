@@ -1,15 +1,15 @@
 use itertools::Itertools;
 use lokicy::entity::pokemon;
-use lokicy::entity::pokemon::MetaType;
-use lokicy::entity::pokemon::MetaType::Mbe as Mpt;
-use lokicy::entity::pokemon::MetaType::Mae as Mpta;
+use lokicy::entity::pokemon::MetaElement;
+use lokicy::entity::pokemon::MetaElement::Mbe as Mpt;
+use lokicy::entity::pokemon::MetaElement::Mae as Mpta;
 use lokicy::entity::pokemon::BasicElement as Pt;
 use lokicy::entity::pokemon::AbilityElement as Pta;
 
 fn main() {
-    let fixed_selection: Vec<Vec<MetaType>> = vec![vec![Mpt(Pt::Grass), Mpt(Pt::Ice)]];
+    let fixed_selection: Vec<Vec<MetaElement>> = vec![vec![Mpt(Pt::Grass), Mpt(Pt::Ice)]];
 
-    let others: Vec<Vec<MetaType>> = vec![
+    let others: Vec<Vec<MetaElement>> = vec![
         vec![Mpt(Pt::Grass), Mpt(Pt::Poison)],
         vec![Mpt(Pt::Electric), Mpt(Pt::Steel)],
         vec![Mpt(Pt::Bug), Mpt(Pt::Fighting), Mpta(Pta::Levitate)],
@@ -20,13 +20,13 @@ fn main() {
     let mut answers = Vec::new();
 
     for other_selection in others.iter().combinations(3 - fixed_selection.len()) {
-        let mut selection: Vec<Vec<MetaType>> = Vec::new();
-        let mut f: Vec<Vec<MetaType>> = fixed_selection
+        let mut selection: Vec<Vec<MetaElement>> = Vec::new();
+        let mut f: Vec<Vec<MetaElement>> = fixed_selection
             .iter()
             .map(|v| v.iter().map(|t| t.clone()).collect())
             .collect();
 
-        let mut o: Vec<Vec<MetaType>> = other_selection
+        let mut o: Vec<Vec<MetaElement>> = other_selection
             .iter()
             .map(|v| v.iter().map(|t| t.clone()).collect())
             .collect();
