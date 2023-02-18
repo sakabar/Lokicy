@@ -1,14 +1,12 @@
 use super::super::super::application::interface::EnvPokemonRepositoryTrait;
-use super::super::super::entity::pokemon::PokemonClass;
-
 use super::super::super::entity::pokemon::BasicElement as Be;
 use super::super::super::entity::pokemon::MetaElement::Mbe;
 use super::super::super::entity::pokemon::MetaElement::Mnone;
-
-use super::super::super::entity::pokemon::PokemonInstance;
+use super::super::super::entity::pokemon::PokemonIndividual;
+use super::super::super::entity::pokemon::PokemonSpecies;
 
 pub struct EnvPokemonRepository {
-    data: Vec<PokemonInstance>,
+    data: Vec<PokemonIndividual>,
 }
 
 impl EnvPokemonRepository {
@@ -20,15 +18,15 @@ impl EnvPokemonRepository {
 }
 
 impl EnvPokemonRepositoryTrait for EnvPokemonRepository {
-    fn get_all(&self) -> &Vec<PokemonInstance> {
+    fn get_all(&self) -> &Vec<PokemonIndividual> {
         &self.data
     }
 }
 
-fn get_initial_data() -> Vec<PokemonInstance> {
+fn get_initial_data() -> Vec<PokemonIndividual> {
     return vec![
-        PokemonInstance::new(
-            PokemonClass::new(149, Mbe(Be::Dragon), Mbe(Be::Flying), Mnone),
+        PokemonIndividual::new(
+            PokemonSpecies::new(149, Mbe(Be::Dragon), Mbe(Be::Flying), Mnone),
             198,
             204,
             115,
@@ -37,8 +35,8 @@ fn get_initial_data() -> Vec<PokemonInstance> {
             100,
             "カイリューHA".to_string(),
         ),
-        PokemonInstance::new(
-            PokemonClass::new(149, Mbe(Be::Normal), Mnone, Mnone),
+        PokemonIndividual::new(
+            PokemonSpecies::new(149, Mbe(Be::Normal), Mnone, Mnone),
             198,
             204,
             115,

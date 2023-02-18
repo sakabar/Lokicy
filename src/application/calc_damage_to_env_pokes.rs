@@ -1,7 +1,7 @@
 use super::super::entity::pokemon::BasicElement as Be;
 use super::super::entity::pokemon::Move;
 use super::super::entity::pokemon::MoveType;
-use super::super::entity::pokemon::PokemonInstance;
+use super::super::entity::pokemon::PokemonIndividual;
 use super::interface::BoxPokemonRepositoryTrait;
 use super::interface::EnvPokemonRepositoryTrait;
 
@@ -9,12 +9,12 @@ pub fn calc_damage_to_env_pokes(
     box_pokemon_repository: &dyn BoxPokemonRepositoryTrait,
     env_pokemon_repository: &dyn EnvPokemonRepositoryTrait,
 ) {
-    let box_pokemons: &Vec<PokemonInstance> = box_pokemon_repository.get_all();
-    let env_pokemons: &Vec<PokemonInstance> = env_pokemon_repository.get_all();
+    let box_pokemons: &Vec<PokemonIndividual> = box_pokemon_repository.get_all();
+    let env_pokemons: &Vec<PokemonIndividual> = env_pokemon_repository.get_all();
 
     // TODO
     // (1) Type -> Elm
-    // (2) 技をPokemonInstanceの中に入れてforで回すようにする
+    // (2) 技をPokemonIndividualの中に入れてforで回すようにする
     // (3) interface層がロジックを知りすぎているので隠蔽する
     // (4) テラスタイプを考慮に入れる。インスタンスを手軽に生成するには?
     for env_pokemon in env_pokemons.iter() {

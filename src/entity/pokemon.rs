@@ -253,14 +253,14 @@ fn it_works_for_pokemon_type_ability() {
 }
 
 #[derive(Copy, Clone, Debug, PartialEq)]
-pub struct PokemonClass {
+pub struct PokemonSpecies {
     no: u16,
     elm1: MetaElement,
     elm2: MetaElement,
     meta_elm: MetaElement,
 }
 
-impl PokemonClass {
+impl PokemonSpecies {
     pub fn new(no: u16, elm1: MetaElement, elm2: MetaElement, meta_elm: MetaElement) -> Self {
         Self {
             no,
@@ -272,8 +272,8 @@ impl PokemonClass {
 }
 
 #[derive(Debug)]
-pub struct PokemonInstance {
-    poke_cls: PokemonClass,
+pub struct PokemonIndividual {
+    poke_species: PokemonSpecies,
     hit_point: i32,
     attack: i32,
     defence: i32,
@@ -283,9 +283,9 @@ pub struct PokemonInstance {
     comment: String,
 }
 
-impl PokemonInstance {
+impl PokemonIndividual {
     pub fn new(
-        poke_cls: PokemonClass,
+        poke_species: PokemonSpecies,
         hit_point: i32,
         attack: i32,
         defence: i32,
@@ -295,7 +295,7 @@ impl PokemonInstance {
         comment: String,
     ) -> Self {
         Self {
-            poke_cls,
+            poke_species,
             hit_point,
             attack,
             defence,
@@ -308,9 +308,9 @@ impl PokemonInstance {
 
     pub fn calc_type_combination_matchup_rate(&self, att: &BasicElement) -> f64 {
         let elms = vec![
-            self.poke_cls.elm1,
-            self.poke_cls.elm2,
-            self.poke_cls.meta_elm,
+            self.poke_species.elm1,
+            self.poke_species.elm2,
+            self.poke_species.meta_elm,
         ];
         calc_type_combination_matchup_rate(att, &elms)
     }
@@ -327,8 +327,8 @@ impl PokemonInstance {
             MoveType::Status => 0.0,
         };
 
-        let r = if (MetaElement::Mbe(*mv.get_poke_type())) == self.poke_cls.elm1
-            || (MetaElement::Mbe(*mv.get_poke_type())) == self.poke_cls.elm2
+        let r = if (MetaElement::Mbe(*mv.get_poke_type())) == self.poke_species.elm1
+            || (MetaElement::Mbe(*mv.get_poke_type())) == self.poke_species.elm2
         {
             1.5
         } else {

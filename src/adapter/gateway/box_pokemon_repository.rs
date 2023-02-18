@@ -4,11 +4,11 @@ use super::super::super::entity::pokemon::BasicElement as Be;
 use super::super::super::entity::pokemon::MetaElement::Mae;
 use super::super::super::entity::pokemon::MetaElement::Mbe;
 use super::super::super::entity::pokemon::MetaElement::Mnone;
-use super::super::super::entity::pokemon::PokemonClass;
-use super::super::super::entity::pokemon::PokemonInstance;
+use super::super::super::entity::pokemon::PokemonIndividual;
+use super::super::super::entity::pokemon::PokemonSpecies;
 
 pub struct BoxPokemonRepository {
-    data: Vec<PokemonInstance>,
+    data: Vec<PokemonIndividual>,
 }
 
 impl BoxPokemonRepository {
@@ -20,15 +20,15 @@ impl BoxPokemonRepository {
 }
 
 impl BoxPokemonRepositoryTrait for BoxPokemonRepository {
-    fn get_all(&self) -> &Vec<PokemonInstance> {
+    fn get_all(&self) -> &Vec<PokemonIndividual> {
         &self.data
     }
 }
 
-fn get_initial_data() -> Vec<PokemonInstance> {
+fn get_initial_data() -> Vec<PokemonIndividual> {
     return vec![
-        PokemonInstance::new(
-            PokemonClass::new(637, Mbe(Be::Bug), Mbe(Be::Fire), Mnone),
+        PokemonIndividual::new(
+            PokemonSpecies::new(637, Mbe(Be::Bug), Mbe(Be::Fire), Mnone),
             191,
             72,
             85,
@@ -37,8 +37,8 @@ fn get_initial_data() -> Vec<PokemonInstance> {
             120,
             "ウルガモス".to_string(),
         ),
-        PokemonInstance::new(
-            PokemonClass::new(130, Mbe(Be::Water), Mbe(Be::Flying), Mnone),
+        PokemonIndividual::new(
+            PokemonSpecies::new(130, Mbe(Be::Water), Mbe(Be::Flying), Mnone),
             202,
             194,
             99,
@@ -47,8 +47,8 @@ fn get_initial_data() -> Vec<PokemonInstance> {
             101,
             "ギャラドス".to_string(),
         ),
-        PokemonInstance::new(
-            PokemonClass::new(713, Mbe(Be::Ice), Mnone, Mnone),
+        PokemonIndividual::new(
+            PokemonSpecies::new(713, Mbe(Be::Ice), Mnone, Mnone),
             202,
             185,
             205,
@@ -57,8 +57,8 @@ fn get_initial_data() -> Vec<PokemonInstance> {
             48,
             "クレベース".to_string(),
         ),
-        PokemonInstance::new(
-            PokemonClass::new(936, Mbe(Be::Fire), Mbe(Be::Psychic), Mae(Ae::FlashFire)),
+        PokemonIndividual::new(
+            PokemonSpecies::new(936, Mbe(Be::Fire), Mbe(Be::Psychic), Mae(Ae::FlashFire)),
             191,
             72,
             122,
@@ -67,8 +67,8 @@ fn get_initial_data() -> Vec<PokemonInstance> {
             95,
             "グレンアルマ".to_string(),
         ),
-        PokemonInstance::new(
-            PokemonClass::new(128, Mbe(Be::Fighting), Mbe(Be::Fire), Mnone),
+        PokemonIndividual::new(
+            PokemonSpecies::new(128, Mbe(Be::Fighting), Mbe(Be::Fire), Mnone),
             182,
             178,
             126,
@@ -77,8 +77,8 @@ fn get_initial_data() -> Vec<PokemonInstance> {
             120,
             "ケンタロス(炎)".to_string(),
         ),
-        PokemonInstance::new(
-            PokemonClass::new(128, Mbe(Be::Fighting), Mbe(Be::Water), Mnone),
+        PokemonIndividual::new(
+            PokemonSpecies::new(128, Mbe(Be::Fighting), Mbe(Be::Water), Mnone),
             182,
             178,
             126,
@@ -87,8 +87,8 @@ fn get_initial_data() -> Vec<PokemonInstance> {
             120,
             "ケンタロス(水)".to_string(),
         ),
-        PokemonInstance::new(
-            PokemonClass::new(1000, Mbe(Be::Steel), Mbe(Be::Ghost), Mnone),
+        PokemonIndividual::new(
+            PokemonSpecies::new(1000, Mbe(Be::Steel), Mbe(Be::Ghost), Mnone),
             194,
             58,
             116,
@@ -97,8 +97,8 @@ fn get_initial_data() -> Vec<PokemonInstance> {
             104,
             "サーフゴー".to_string(),
         ),
-        PokemonInstance::new(
-            PokemonClass::new(635, Mbe(Be::Dark), Mbe(Be::Dragon), Mae(Ae::Levitate)),
+        PokemonIndividual::new(
+            PokemonSpecies::new(635, Mbe(Be::Dark), Mbe(Be::Dragon), Mae(Ae::Levitate)),
             199,
             112,
             111,
