@@ -10,16 +10,16 @@ itertools = "0.10.5"
 
 [[bin]]
 name = "main"
-path = "src/interface/controller/main.rs"
+path = "src/adapter/controller/main.rs"
 
 [[bin]]
 name = "show_matchup_rate_table"
-path = "src/interface/controller/show_matchup_rate_table.rs"
+path = "src/adapter/controller/show_matchup_rate_table.rs"
 
 [[bin]]
 name = "show_all_possible_selections"
-path = "src/interface/controller/show_all_possible_selections.rs"
+path = "src/adapter/controller/show_all_possible_selections.rs"
 
 [[bin]]
 name = "calc_damage_to_env_pokes"
-path = "src/interface/controller/calc_damage_to_env_pokes.rs"
+path = "src/adapter/controller/calc_damage_to_env_pokes.rs"
