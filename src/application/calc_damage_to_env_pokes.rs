@@ -1,14 +1,14 @@
-use lokicy::entity::pokemon::AbilityElement as Ae;
-use lokicy::entity::pokemon::BasicElement as Be;
-use lokicy::entity::pokemon::MetaElement::Mae;
-use lokicy::entity::pokemon::MetaElement::Mbe;
-use lokicy::entity::pokemon::MetaElement::Mnone;
-use lokicy::entity::pokemon::Move;
-use lokicy::entity::pokemon::MoveType;
-use lokicy::entity::pokemon::PokemonClass;
-use lokicy::entity::pokemon::PokemonInstance;
+use super::super::entity::pokemon::AbilityElement as Ae;
+use super::super::entity::pokemon::BasicElement as Be;
+use super::super::entity::pokemon::MetaElement::Mae;
+use super::super::entity::pokemon::MetaElement::Mbe;
+use super::super::entity::pokemon::MetaElement::Mnone;
+use super::super::entity::pokemon::Move;
+use super::super::entity::pokemon::MoveType;
+use super::super::entity::pokemon::PokemonClass;
+use super::super::entity::pokemon::PokemonInstance;
 
-fn main() {
+pub fn calc_damage_to_env_pokes() {
     let yakemons: Vec<PokemonInstance> = vec![
         PokemonInstance::new(
             PokemonClass::new(637, Mbe(Be::Bug), Mbe(Be::Fire), Mnone),
