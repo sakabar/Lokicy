@@ -258,16 +258,48 @@ pub struct PokemonSpecies {
     elm1: MetaElement,
     elm2: MetaElement,
     meta_elm: MetaElement,
+    base_hit_point: i32,
+    base_attack: i32,
+    base_defence: i32,
+    base_special_attack: i32,
+    base_special_defence: i32,
+    base_speed: i32,
 }
 
 impl PokemonSpecies {
-    pub fn new(no: u16, elm1: MetaElement, elm2: MetaElement, meta_elm: MetaElement) -> Self {
+    fn new(
+        no: u16,
+        elm1: MetaElement,
+        elm2: MetaElement,
+        meta_elm: MetaElement,
+        base_hit_point: i32,
+        base_attack: i32,
+        base_defence: i32,
+        base_special_attack: i32,
+        base_special_defence: i32,
+        base_speed: i32,
+    ) -> Self {
         Self {
             no,
             elm1,
             elm2,
             meta_elm,
+            base_hit_point,
+            base_attack,
+            base_defence,
+            base_special_attack,
+            base_special_defence,
+            base_speed,
         }
+    }
+
+    pub fn new_by_number_elements(
+        no: u16,
+        elm1: MetaElement,
+        elm2: MetaElement,
+        meta_elm: MetaElement,
+    ) -> Self {
+        Self::new(no, elm1, elm2, meta_elm, 0, 0, 0, 0, 0, 0)
     }
 }
 

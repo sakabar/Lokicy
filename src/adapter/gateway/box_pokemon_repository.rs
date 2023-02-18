@@ -28,7 +28,7 @@ impl BoxPokemonRepositoryTrait for BoxPokemonRepository {
 fn get_initial_data() -> Vec<PokemonIndividual> {
     return vec![
         PokemonIndividual::new(
-            PokemonSpecies::new(637, Mbe(Be::Bug), Mbe(Be::Fire), Mnone),
+            PokemonSpecies::new_by_number_elements(637, Mbe(Be::Bug), Mbe(Be::Fire), Mnone),
             191,
             72,
             85,
@@ -38,7 +38,7 @@ fn get_initial_data() -> Vec<PokemonIndividual> {
             "ウルガモス".to_string(),
         ),
         PokemonIndividual::new(
-            PokemonSpecies::new(130, Mbe(Be::Water), Mbe(Be::Flying), Mnone),
+            PokemonSpecies::new_by_number_elements(130, Mbe(Be::Water), Mbe(Be::Flying), Mnone),
             202,
             194,
             99,
@@ -48,7 +48,7 @@ fn get_initial_data() -> Vec<PokemonIndividual> {
             "ギャラドス".to_string(),
         ),
         PokemonIndividual::new(
-            PokemonSpecies::new(713, Mbe(Be::Ice), Mnone, Mnone),
+            PokemonSpecies::new_by_number_elements(713, Mbe(Be::Ice), Mnone, Mnone),
             202,
             185,
             205,
@@ -58,7 +58,12 @@ fn get_initial_data() -> Vec<PokemonIndividual> {
             "クレベース".to_string(),
         ),
         PokemonIndividual::new(
-            PokemonSpecies::new(936, Mbe(Be::Fire), Mbe(Be::Psychic), Mae(Ae::FlashFire)),
+            PokemonSpecies::new_by_number_elements(
+                936,
+                Mbe(Be::Fire),
+                Mbe(Be::Psychic),
+                Mae(Ae::FlashFire),
+            ),
             191,
             72,
             122,
@@ -68,7 +73,7 @@ fn get_initial_data() -> Vec<PokemonIndividual> {
             "グレンアルマ".to_string(),
         ),
         PokemonIndividual::new(
-            PokemonSpecies::new(128, Mbe(Be::Fighting), Mbe(Be::Fire), Mnone),
+            PokemonSpecies::new_by_number_elements(128, Mbe(Be::Fighting), Mbe(Be::Fire), Mnone),
             182,
             178,
             126,
@@ -78,7 +83,7 @@ fn get_initial_data() -> Vec<PokemonIndividual> {
             "ケンタロス(炎)".to_string(),
         ),
         PokemonIndividual::new(
-            PokemonSpecies::new(128, Mbe(Be::Fighting), Mbe(Be::Water), Mnone),
+            PokemonSpecies::new_by_number_elements(128, Mbe(Be::Fighting), Mbe(Be::Water), Mnone),
             182,
             178,
             126,
@@ -88,7 +93,7 @@ fn get_initial_data() -> Vec<PokemonIndividual> {
             "ケンタロス(水)".to_string(),
         ),
         PokemonIndividual::new(
-            PokemonSpecies::new(1000, Mbe(Be::Steel), Mbe(Be::Ghost), Mnone),
+            PokemonSpecies::new_by_number_elements(1000, Mbe(Be::Steel), Mbe(Be::Ghost), Mnone),
             194,
             58,
             116,
@@ -98,7 +103,12 @@ fn get_initial_data() -> Vec<PokemonIndividual> {
             "サーフゴー".to_string(),
         ),
         PokemonIndividual::new(
-            PokemonSpecies::new(635, Mbe(Be::Dark), Mbe(Be::Dragon), Mae(Ae::Levitate)),
+            PokemonSpecies::new_by_number_elements(
+                635,
+                Mbe(Be::Dark),
+                Mbe(Be::Dragon),
+                Mae(Ae::Levitate),
+            ),
             199,
             112,
             111,

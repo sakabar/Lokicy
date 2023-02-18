@@ -26,7 +26,7 @@ impl EnvPokemonRepositoryTrait for EnvPokemonRepository {
 fn get_initial_data() -> Vec<PokemonIndividual> {
     return vec![
         PokemonIndividual::new(
-            PokemonSpecies::new(149, Mbe(Be::Dragon), Mbe(Be::Flying), Mnone),
+            PokemonSpecies::new_by_number_elements(149, Mbe(Be::Dragon), Mbe(Be::Flying), Mnone),
             198,
             204,
             115,
@@ -36,7 +36,7 @@ fn get_initial_data() -> Vec<PokemonIndividual> {
             "カイリューHA".to_string(),
         ),
         PokemonIndividual::new(
-            PokemonSpecies::new(149, Mbe(Be::Normal), Mnone, Mnone),
+            PokemonSpecies::new_by_number_elements(149, Mbe(Be::Normal), Mnone, Mnone),
             198,
             204,
             115,
