@@ -4,6 +4,8 @@ use super::super::super::entity::pokemon::BasicElement as Be;
 use super::super::super::entity::pokemon::MetaElement::Mae;
 use super::super::super::entity::pokemon::MetaElement::Mbe;
 use super::super::super::entity::pokemon::MetaElement::Mnone;
+use super::super::super::entity::pokemon::Move;
+use super::super::super::entity::pokemon::MoveType;
 use super::super::super::entity::pokemon::PokemonIndividual;
 use super::super::super::entity::pokemon::PokemonSpecies;
 
@@ -35,6 +37,10 @@ fn get_initial_data() -> Vec<PokemonIndividual> {
             205,
             127,
             120,
+            vec![
+                Move::new("オーバーヒート", Be::Fire, MoveType::Special, 135, 1.0, 10),
+                Move::new("むしのさざめき", Be::Bug, MoveType::Special, 90, 1.0, 10),
+            ],
             "ウルガモス".to_string(),
         ),
         PokemonIndividual::new(
@@ -45,6 +51,12 @@ fn get_initial_data() -> Vec<PokemonIndividual> {
             72,
             120,
             101,
+            vec![
+                Move::new("アクアテール", Be::Water, MoveType::Physical, 90, 0.95, 10),
+                Move::new("じしん", Be::Ground, MoveType::Physical, 100, 1.0, 10),
+                Move::new("ゆきなだれ", Be::Ice, MoveType::Physical, 60, 1.0, 10),
+                Move::new("だいもんじ", Be::Fire, MoveType::Special, 110, 1.0, 10),
+            ],
             "ギャラドス".to_string(),
         ),
         PokemonIndividual::new(
@@ -55,6 +67,14 @@ fn get_initial_data() -> Vec<PokemonIndividual> {
             57,
             66,
             48,
+            vec![Move::new(
+                "つららおとし",
+                Be::Ice,
+                MoveType::Physical,
+                85,
+                1.0,
+                10,
+            )],
             "クレベース".to_string(),
         ),
         PokemonIndividual::new(
@@ -70,6 +90,14 @@ fn get_initial_data() -> Vec<PokemonIndividual> {
             194,
             100,
             95,
+            vec![Move::new(
+                "オーバーヒート",
+                Be::Fire,
+                MoveType::Special,
+                135,
+                1.0,
+                10,
+            )],
             "グレンアルマ".to_string(),
         ),
         PokemonIndividual::new(
@@ -80,6 +108,17 @@ fn get_initial_data() -> Vec<PokemonIndividual> {
             45,
             90,
             120,
+            vec![
+                Move::new(
+                    "インファイト",
+                    Be::Fighting,
+                    MoveType::Physical,
+                    120,
+                    1.0,
+                    10,
+                ),
+                Move::new("フレアドライブ", Be::Fire, MoveType::Physical, 120, 1.0, 10),
+            ],
             "ケンタロス(炎)".to_string(),
         ),
         PokemonIndividual::new(
@@ -90,6 +129,24 @@ fn get_initial_data() -> Vec<PokemonIndividual> {
             45,
             90,
             120,
+            vec![
+                Move::new(
+                    "インファイト",
+                    Be::Fighting,
+                    MoveType::Physical,
+                    120,
+                    1.0,
+                    10,
+                ),
+                Move::new(
+                    "ウェーブタックル",
+                    Be::Water,
+                    MoveType::Physical,
+                    120,
+                    1.0,
+                    10,
+                ),
+            ],
             "ケンタロス(水)".to_string(),
         ),
         PokemonIndividual::new(
@@ -100,6 +157,17 @@ fn get_initial_data() -> Vec<PokemonIndividual> {
             203,
             111,
             104,
+            vec![
+                Move::new(
+                    "ゴールドラッシュ",
+                    Be::Steel,
+                    MoveType::Special,
+                    120,
+                    1.0,
+                    10,
+                ),
+                Move::new("シャドーボール", Be::Steel, MoveType::Special, 80, 1.0, 10),
+            ],
             "サーフゴー".to_string(),
         ),
         PokemonIndividual::new(
@@ -115,6 +183,19 @@ fn get_initial_data() -> Vec<PokemonIndividual> {
             194,
             110,
             118,
+            vec![
+                Move::new(
+                    "りゅうせいぐん",
+                    Be::Dragon,
+                    MoveType::Special,
+                    130,
+                    1.0,
+                    10,
+                ),
+                Move::new("あくのはどう", Be::Dark, MoveType::Special, 80, 1.0, 10),
+                Move::new("だいもんじ", Be::Fire, MoveType::Special, 110, 1.0, 10),
+                Move::new("ラスターカノン", Be::Steel, MoveType::Special, 80, 1.0, 10),
+            ],
             "サザンドラ".to_string(),
         ),
         // 次、ヤバコイルから

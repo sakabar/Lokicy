@@ -312,6 +312,7 @@ pub struct PokemonIndividual {
     special_attack: i32,
     special_defence: i32,
     speed: i32,
+    moves: Vec<Move>,
     comment: String,
 }
 
@@ -324,6 +325,7 @@ impl PokemonIndividual {
         special_attack: i32,
         special_defence: i32,
         speed: i32,
+        moves: Vec<Move>,
         comment: String,
     ) -> Self {
         Self {
@@ -334,6 +336,7 @@ impl PokemonIndividual {
             special_attack,
             special_defence,
             speed,
+            moves,
             comment,
         }
     }
@@ -345,6 +348,10 @@ impl PokemonIndividual {
             self.poke_species.meta_elm,
         ];
         calc_type_combination_matchup_rate(att, &elms)
+    }
+
+    pub fn get_moves(&self) -> &Vec<Move> {
+        &self.moves
     }
 
     pub fn get_comment(&self) -> &str {
@@ -379,12 +386,14 @@ impl PokemonIndividual {
     }
 }
 
+#[derive(Copy, Clone, Debug, PartialEq)]
 pub enum MoveType {
     Physical,
     Special,
     Status,
 }
 
+#[derive(Debug)]
 pub struct Move {
     name: String,
     poke_type: BasicElement,
@@ -399,9 +408,9 @@ impl Move {
         name: &str,
         poke_type: BasicElement,
         move_type: MoveType,
-        pp: u8,
         power: i32,
         accuracy: f64,
+        pp: u8,
     ) -> Self {
         Self {
             name: name.to_string(),
@@ -423,5 +432,9 @@ impl Move {
 
     pub fn get_power(&self) -> i32 {
         self.power
+    }
+
+    pub fn get_name(&self) -> &str {
+        &self.name
     }
 }

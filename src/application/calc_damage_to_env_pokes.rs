@@ -13,31 +13,38 @@ pub fn calc_damage_to_env_pokes(
     let env_pokemons: &Vec<PokemonIndividual> = env_pokemon_repository.get_all();
 
     // TODO
-    // (1) Type -> Elm
-    // (2) 技をPokemonIndividualの中に入れてforで回すようにする
-    // (3) interface層がロジックを知りすぎているので隠蔽する
     // (4) テラスタイプを考慮に入れる。インスタンスを手軽に生成するには?
     for env_pokemon in env_pokemons.iter() {
         let mut answers = vec![];
         for box_pokemon in box_pokemons.iter() {
-            // 今は仮に、全員ゆきなだれのみとする
-            // let aqua_tail = Move::new("アクアテール", Be::Water, MoveType::Physical, 10, 90, 0.95);
-            let mv = Move::new("ゆきなだれ", Be::Ice, MoveType::Physical, 10, 60, 1.0);
+            let mut max_damage_index_permille: i32 = 0;
+            let mut max_damage_move_name = "";
 
-            let (mt, offensive_index) = box_pokemon.get_offensive_index(&mv);
-            let defensive_index = env_pokemon.get_defensive_index(mt);
-            let r = env_pokemon.calc_type_combination_matchup_rate(&mv.get_poke_type());
+            for mv in box_pokemon.get_moves().iter() {
+                let (mt, offensive_index) = box_pokemon.get_offensive_index(&mv);
+                let defensive_index = env_pokemon.get_defensive_index(mt);
+                let r = env_pokemon.calc_type_combination_matchup_rate(&mv.get_poke_type());
 
-            // 乱数最悪の場合で考える
-            let damage_index: f64 = (0.44 * offensive_index / defensive_index) * r * 0.85;
-            let damage_index_permille: i32 = (damage_index * 1000.0).floor() as i32;
+                // 乱数最悪の場合で考える
+                let damage_index: f64 = (0.44 * offensive_index / defensive_index) * r * 0.85;
+                let damage_index_permille: i32 = (damage_index * 1000.0).floor() as i32;
+
+                if damage_index_permille > max_damage_index_permille {
+                    max_damage_index_permille = damage_index_permille;
+                    max_damage_move_name = mv.get_name();
+                }
+            }
 
             // println!("{}", box_pokemon.get_comment());
             // println!("{}", offensive_index);
             // println!("{}", defensive_index);
             // println!("");
 
-            answers.push((damage_index_permille, box_pokemon.get_comment()));
+            answers.push((
+                max_damage_index_permille,
+                box_pokemon.get_comment(),
+                max_damage_move_name,
+            ));
         }
 
         answers.sort();
