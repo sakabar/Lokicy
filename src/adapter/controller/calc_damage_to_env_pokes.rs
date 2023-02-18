@@ -1,12 +1,12 @@
-use lokicy::entity::pokemon::MetaElement::Mnone;
-use lokicy::entity::pokemon::MetaElement::Mbe;
+use lokicy::entity::pokemon::AbilityElement as Ae;
+use lokicy::entity::pokemon::BasicElement as Be;
 use lokicy::entity::pokemon::MetaElement::Mae;
+use lokicy::entity::pokemon::MetaElement::Mbe;
+use lokicy::entity::pokemon::MetaElement::Mnone;
 use lokicy::entity::pokemon::Move;
 use lokicy::entity::pokemon::MoveType;
 use lokicy::entity::pokemon::PokemonClass;
 use lokicy::entity::pokemon::PokemonInstance;
-use lokicy::entity::pokemon::BasicElement as Be;
-use lokicy::entity::pokemon::AbilityElement as Ae;
 
 fn main() {
     let yakemons: Vec<PokemonInstance> = vec![

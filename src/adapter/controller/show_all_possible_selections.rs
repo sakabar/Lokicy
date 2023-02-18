@@ -1,10 +1,10 @@
 use itertools::Itertools;
 use lokicy::entity::pokemon;
-use lokicy::entity::pokemon::MetaElement;
-use lokicy::entity::pokemon::MetaElement::Mbe as Mpt;
-use lokicy::entity::pokemon::MetaElement::Mae as Mpta;
-use lokicy::entity::pokemon::BasicElement as Pt;
 use lokicy::entity::pokemon::AbilityElement as Pta;
+use lokicy::entity::pokemon::BasicElement as Pt;
+use lokicy::entity::pokemon::MetaElement;
+use lokicy::entity::pokemon::MetaElement::Mae as Mpta;
+use lokicy::entity::pokemon::MetaElement::Mbe as Mpt;
 
 fn main() {
     let fixed_selection: Vec<Vec<MetaElement>> = vec![vec![Mpt(Pt::Grass), Mpt(Pt::Ice)]];
