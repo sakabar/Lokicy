@@ -5,11 +5,13 @@ use super::super::entity::pokemon::PokemonIndividual;
 use super::interface::BoxPokemonRepositoryTrait;
 use super::interface::EnvPokemonRepositoryTrait;
 
-pub fn calc_damage_to_env_pokes(
+pub async fn calc_damage_to_env_pokes(
     box_pokemon_repository: &dyn BoxPokemonRepositoryTrait,
-    env_pokemon_repository: &dyn EnvPokemonRepositoryTrait,
+    env_pokemon_repository: &mut dyn EnvPokemonRepositoryTrait,
 ) {
     let box_pokemons: &Vec<PokemonIndividual> = box_pokemon_repository.get_all();
+
+    env_pokemon_repository.load().await;
     let env_pokemons: &Vec<PokemonIndividual> = env_pokemon_repository.get_all();
 
     // TODO
