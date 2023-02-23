@@ -1,0 +1,25 @@
+[package]
+name = "lokicy"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+itertools = "0.10.5"
+
+[[bin]]
+name = "main"
+path = "src/adapter/controller/main.rs"
+
+[[bin]]
+name = "show_matchup_rate_table"
+path = "src/adapter/controller/show_matchup_rate_table.rs"
+
+[[bin]]
+name = "show_all_possible_selections"
+path = "src/adapter/controller/show_all_possible_selections.rs"
+
+[[bin]]
+name = "calc_damage_to_env_pokes"
+path = "src/adapter/controller/calc_damage_to_env_pokes.rs"
