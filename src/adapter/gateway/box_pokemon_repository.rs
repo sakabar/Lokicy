@@ -31,6 +31,8 @@ fn get_initial_data() -> Vec<PokemonIndividual> {
     return vec![
         PokemonIndividual::new(
             PokemonSpecies::new_by_number_elements(637, Mbe(Be::Bug), Mbe(Be::Fire), Mnone),
+            Be::Bug,
+            false,
             191,
             72,
             85,
@@ -45,6 +47,8 @@ fn get_initial_data() -> Vec<PokemonIndividual> {
         ),
         PokemonIndividual::new(
             PokemonSpecies::new_by_number_elements(130, Mbe(Be::Water), Mbe(Be::Flying), Mnone),
+            Be::Water,
+            false,
             202,
             194,
             99,
@@ -61,6 +65,8 @@ fn get_initial_data() -> Vec<PokemonIndividual> {
         ),
         PokemonIndividual::new(
             PokemonSpecies::new_by_number_elements(713, Mbe(Be::Ice), Mnone, Mnone),
+            Be::Ice,
+            false,
             202,
             185,
             205,
@@ -84,6 +90,8 @@ fn get_initial_data() -> Vec<PokemonIndividual> {
                 Mbe(Be::Psychic),
                 Mae(Ae::FlashFire),
             ),
+            Be::Fire,
+            false,
             191,
             72,
             122,
@@ -102,6 +110,8 @@ fn get_initial_data() -> Vec<PokemonIndividual> {
         ),
         PokemonIndividual::new(
             PokemonSpecies::new_by_number_elements(128, Mbe(Be::Fighting), Mbe(Be::Fire), Mnone),
+            Be::Fighting,
+            false,
             182,
             178,
             126,
@@ -123,6 +133,8 @@ fn get_initial_data() -> Vec<PokemonIndividual> {
         ),
         PokemonIndividual::new(
             PokemonSpecies::new_by_number_elements(128, Mbe(Be::Fighting), Mbe(Be::Water), Mnone),
+            Be::Fighting,
+            false,
             182,
             178,
             126,
@@ -151,6 +163,8 @@ fn get_initial_data() -> Vec<PokemonIndividual> {
         ),
         PokemonIndividual::new(
             PokemonSpecies::new_by_number_elements(1000, Mbe(Be::Steel), Mbe(Be::Ghost), Mnone),
+            Be::Ghost,
+            false,
             194,
             58,
             116,
@@ -177,6 +191,8 @@ fn get_initial_data() -> Vec<PokemonIndividual> {
                 Mbe(Be::Dragon),
                 Mae(Ae::Levitate),
             ),
+            Be::Steel,
+            false,
             199,
             112,
             111,
