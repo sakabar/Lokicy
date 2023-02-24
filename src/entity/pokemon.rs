@@ -306,6 +306,8 @@ impl PokemonSpecies {
 #[derive(Debug)]
 pub struct PokemonIndividual {
     poke_species: PokemonSpecies,
+    tera_type: BasicElement,
+    is_terastallized: bool,
     hit_point: i32,
     attack: i32,
     defence: i32,
@@ -319,6 +321,8 @@ pub struct PokemonIndividual {
 impl PokemonIndividual {
     pub fn new(
         poke_species: PokemonSpecies,
+        tera_type: BasicElement,
+        is_terastallized: bool,
         hit_point: i32,
         attack: i32,
         defence: i32,
@@ -330,6 +334,8 @@ impl PokemonIndividual {
     ) -> Self {
         Self {
             poke_species,
+            tera_type,
+            is_terastallized,
             hit_point,
             attack,
             defence,
@@ -342,12 +348,19 @@ impl PokemonIndividual {
     }
 
     pub fn calc_type_combination_matchup_rate(&self, att: &BasicElement) -> f64 {
-        let elms = vec![
-            self.poke_species.elm1,
-            self.poke_species.elm2,
-            self.poke_species.meta_elm,
-        ];
-        calc_type_combination_matchup_rate(att, &elms)
+        if self.is_terastallized {
+            let elms = vec![MetaElement::Mbe(self.tera_type)];
+
+            calc_type_combination_matchup_rate(att, &elms)
+        } else {
+            let elms = vec![
+                self.poke_species.elm1,
+                self.poke_species.elm2,
+                self.poke_species.meta_elm,
+            ];
+
+            calc_type_combination_matchup_rate(att, &elms)
+        }
     }
 
     pub fn get_moves(&self) -> &Vec<Move> {

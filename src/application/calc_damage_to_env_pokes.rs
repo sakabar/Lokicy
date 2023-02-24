@@ -1,6 +1,3 @@
-use super::super::entity::pokemon::BasicElement as Be;
-use super::super::entity::pokemon::Move;
-use super::super::entity::pokemon::MoveType;
 use super::super::entity::pokemon::PokemonIndividual;
 use super::interface::BoxPokemonRepositoryTrait;
 use super::interface::EnvPokemonRepositoryTrait;
@@ -14,10 +11,10 @@ pub async fn calc_damage_to_env_pokes(
     env_pokemon_repository.load().await;
     let env_pokemons: &Vec<PokemonIndividual> = env_pokemon_repository.get_all();
 
-    // TODO
-    // (4) テラスタイプを考慮に入れる。インスタンスを手軽に生成するには?
+    let mut answers: Vec<(i32, String, Vec<(i32, &str, &str)>)> = vec![];
+
     for env_pokemon in env_pokemons.iter() {
-        let mut answers = vec![];
+        let mut box_pokemon_damage_indexes = vec![];
         for box_pokemon in box_pokemons.iter() {
             let mut max_damage_index_permille: i32 = 0;
             let mut max_damage_move_name = "";
@@ -37,22 +34,27 @@ pub async fn calc_damage_to_env_pokes(
                 }
             }
 
-            // println!("{}", box_pokemon.get_comment());
-            // println!("{}", offensive_index);
-            // println!("{}", defensive_index);
-            // println!("");
-
-            answers.push((
+            box_pokemon_damage_indexes.push((
                 max_damage_index_permille,
                 box_pokemon.get_comment(),
                 max_damage_move_name,
             ));
         }
 
-        answers.sort();
-        answers.reverse();
-        println!("{}", env_pokemon.get_comment());
-        println!("{:?}", answers);
-        println!("");
+        box_pokemon_damage_indexes.sort();
+        box_pokemon_damage_indexes.reverse();
+
+        let max_damage_index_permille = box_pokemon_damage_indexes[0].0;
+        let pair = (
+            max_damage_index_permille,
+            format!("{}", env_pokemon.get_comment()),
+            box_pokemon_damage_indexes,
+        );
+        answers.push(pair);
+    }
+
+    answers.sort();
+    for (damage, name, boxs) in answers.iter() {
+        println!("{}\t{}\t{:?}", damage, name, boxs[0]);
     }
 }
