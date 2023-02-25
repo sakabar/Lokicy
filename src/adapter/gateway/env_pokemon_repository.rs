@@ -1,4 +1,6 @@
 use super::super::super::application::interface::EnvPokemonRepositoryTrait;
+use super::super::super::entity::pokemon::base_stats_to_stats;
+use super::super::super::entity::pokemon::base_stats_to_stats_hp;
 use super::super::super::entity::pokemon::BasicElement as Be;
 use super::super::super::entity::pokemon::MetaElement as Me;
 use super::super::super::entity::pokemon::MetaElement::Mbe;
@@ -7,45 +9,10 @@ use super::super::super::entity::pokemon::Move;
 use super::super::super::entity::pokemon::MoveType;
 use super::super::super::entity::pokemon::PokemonIndividual;
 use super::super::super::entity::pokemon::PokemonSpecies;
+use super::rustemon::read_base_stats;
+use super::rustemon::read_pokemon_types;
 use async_trait::async_trait;
-use log::{debug, warn};
-
-fn base_stats_to_stats_hp(
-    base_stats: i32,
-    individual_value: i32,
-    effort_value: i32,
-    level: i32,
-) -> i32 {
-    let x: i32 = (base_stats * 2 + individual_value + (effort_value / 4)) * level / 100;
-    x + 10 + level
-}
-
-#[test]
-fn it_works_for_base_stats_to_stats_hp() {
-    // ハピナスのHP特化(Lv.50)
-    let actual = base_stats_to_stats_hp(255, 31, 252, 50, 1.1);
-    let expected = 362;
-    assert_eq!(actual, expected);
-}
-
-fn base_stats_to_stats(
-    base_stats: i32,
-    individual_value: i32,
-    effort_value: i32,
-    level: i32,
-    natural: f32,
-) -> i32 {
-    let x = (base_stats * 2 + individual_value + (effort_value / 4)) * level / 100;
-    ((x as f32 + 5.0) * natural).floor() as i32
-}
-
-#[test]
-fn it_works_for_base_stats_to_stats() {
-    // サンダースの素早さ特化(Lv.50)
-    let actual = base_stats_to_stats(130, 31, 252, 50, 1.1);
-    let expected = 200;
-    assert_eq!(actual, expected);
-}
+use log::debug;
 
 pub struct EnvPokemonRepository {
     data: Vec<PokemonIndividual>,
@@ -153,6 +120,114 @@ impl EnvPokemonRepositoryTrait for EnvPokemonRepository {
                     (Be::Fighting, 0.156),
                 ],
             ),
+            // ラウドボーン
+            (
+                911,
+                vec![
+                    (Be::Fairy, 0.356),
+                    (Be::Normal, 0.260),
+                    (Be::Fire, 0.178),
+                    (Be::Water, 0.096),
+                    (Be::Grass, 0.045),
+                ],
+            ),
+            // ヘイラッシャ
+            (
+                977,
+                vec![
+                    (Be::Grass, 0.298),
+                    (Be::Fairy, 0.207),
+                    (Be::Ground, 0.148),
+                    (Be::Water, 0.097),
+                    (Be::Steel, 0.052),
+                ],
+            ),
+            // ハッサム
+            (212, vec![(Be::Steel, 0.631), (Be::Water, 0.166)]),
+            // ミトム
+            (
+                0479,
+                vec![
+                    (Be::Fairy, 0.469),
+                    (Be::Steel, 0.203),
+                    (Be::Electric, 0.140),
+                    (Be::Ghost, 0.075),
+                ],
+            ),
+            // キョジオーン
+            (
+                934,
+                vec![
+                    (Be::Ghost, 0.482),
+                    (Be::Water, 0.173),
+                    (Be::Flying, 0.149),
+                    (Be::Poison, 0.069),
+                    (Be::Fairy, 0.056),
+                ],
+            ),
+            // ガブリアス
+            (
+                445,
+                vec![
+                    (Be::Steel, 0.297),
+                    (Be::Fire, 0.213),
+                    (Be::Ground, 0.174),
+                    (Be::Fairy, 0.172),
+                    (Be::Water, 0.047),
+                ],
+            ),
+            // ドラパルト
+            (
+                887,
+                vec![
+                    (Be::Dragon, 0.221),
+                    (Be::Ghost, 0.216),
+                    (Be::Fire, 0.215),
+                    (Be::Steel, 0.167),
+                    (Be::Fairy, 0.062),
+                ],
+            ),
+            // マスカーニャ
+            (
+                908,
+                vec![(Be::Grass, 0.679), (Be::Dark, 0.130), (Be::Fire, 0.042)],
+            ),
+            // テツノカイナ
+            (
+                992,
+                vec![
+                    (Be::Ground, 0.217),
+                    (Be::Flying, 0.205),
+                    (Be::Electric, 0.205),
+                    (Be::Fighting, 0.170),
+                    (Be::Fairy, 0.068),
+                ],
+            ),
+            // コノヨザル
+            (
+                979,
+                vec![
+                    (Be::Fire, 0.244),
+                    (Be::Normal, 0.190),
+                    (Be::Poison, 0.179),
+                    (Be::Steel, 0.170),
+                    (Be::Fighting, 0.059),
+                ],
+            ),
+            // (, vec![
+            //     (Be::,0.),
+            //     (Be::,0.),
+            //     (Be::,0.),
+            //     (Be::,0.),
+            // ]),
+
+            // (, vec![
+            //     (Be::,0.),
+            //     (Be::,0.),
+            //     (Be::,0.),
+            //     (Be::,0.),
+            // ]),
+
             // (, vec![
             //     (Be::,0.),
             //     (Be::,0.),
@@ -180,12 +255,12 @@ impl EnvPokemonRepositoryTrait for EnvPokemonRepository {
                 rustemon::pokemon::pokemon_species::get_by_id(pokemon_no, &self.rustemon_client)
                     .await;
 
-            let mut base_stats_hp: i32 = 0;
-            let mut base_stats_attack: i32 = 0;
-            let mut base_stats_defense: i32 = 0;
-            let mut base_stats_special_attack: i32 = 0;
-            let mut base_stats_special_defense: i32 = 0;
-            let mut base_stats_speed: i32 = 0;
+            let base_stats_hp: i32;
+            let base_stats_attack: i32;
+            let base_stats_defense: i32;
+            let base_stats_special_attack: i32;
+            let base_stats_special_defense: i32;
+            let base_stats_speed: i32;
 
             let mut ja_name: String = "".to_string();
             match pokemon_species_result {
@@ -203,42 +278,17 @@ impl EnvPokemonRepositoryTrait for EnvPokemonRepository {
 
             match pokemon_result {
                 Ok(pokemon) => {
-                    for pokemon_stat in pokemon.stats.iter() {
-                        match pokemon_stat.stat.name.as_str() {
-                            "hp" => {
-                                base_stats_hp = pokemon_stat.base_stat as i32;
-                            }
-                            "attack" => {
-                                base_stats_attack = pokemon_stat.base_stat as i32;
-                            }
+                    (
+                        base_stats_hp,
+                        base_stats_attack,
+                        base_stats_defense,
+                        base_stats_special_attack,
+                        base_stats_special_defense,
+                        base_stats_speed,
+                    ) = read_base_stats(&pokemon.stats);
 
-                            "defense" => {
-                                base_stats_defense = pokemon_stat.base_stat as i32;
-                            }
-
-                            "special-attack" => {
-                                base_stats_special_attack = pokemon_stat.base_stat as i32;
-                            }
-
-                            "special-defense" => {
-                                base_stats_special_defense = pokemon_stat.base_stat as i32;
-                            }
-                            "speed" => {
-                                base_stats_speed = pokemon_stat.base_stat as i32;
-                            }
-                            _ => {}
-                        }
-                    }
-
-                    for pokemon_types in pokemon.types.iter() {
-                        let type_name: &str = &pokemon_types.type_.name;
-                        match poke_api_type_name_to_basic_element(type_name) {
-                            Some(elm) => {
-                                elms.push(Mbe(elm));
-                            }
-                            None => {}
-                        }
-                    }
+                    let mut tmp_elms = read_pokemon_types(&pokemon.types);
+                    elms.append(&mut tmp_elms);
 
                     while elms.len() < 3 {
                         elms.push(Mnone);
@@ -410,31 +460,4 @@ fn get_initial_data() -> Vec<PokemonIndividual> {
             "カイリューHA(ノマテラ)".to_string(),
         ),
     ];
-}
-
-fn poke_api_type_name_to_basic_element(basic_element_str: &str) -> Option<Be> {
-    return match basic_element_str {
-        "normal" => Some(Be::Normal),
-        "fire" => Some(Be::Fire),
-        "water" => Some(Be::Water),
-        "electric" => Some(Be::Electric),
-        "grass" => Some(Be::Grass),
-        "ice" => Some(Be::Ice),
-        "fighting" => Some(Be::Fighting),
-        "poison" => Some(Be::Poison),
-        "ground" => Some(Be::Ground),
-        "flying" => Some(Be::Flying),
-        "psychic" => Some(Be::Psychic),
-        "bug" => Some(Be::Bug),
-        "rock" => Some(Be::Rock),
-        "ghost" => Some(Be::Ghost),
-        "dragon" => Some(Be::Dragon),
-        "dark" => Some(Be::Dark),
-        "steel" => Some(Be::Steel),
-        "fairy" => Some(Be::Fairy),
-        _ => {
-            warn!("Unknwon basic_element: {}", basic_element_str);
-            None
-        }
-    };
 }

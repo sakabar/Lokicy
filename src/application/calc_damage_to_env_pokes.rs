@@ -3,9 +3,10 @@ use super::interface::BoxPokemonRepositoryTrait;
 use super::interface::EnvPokemonRepositoryTrait;
 
 pub async fn calc_damage_to_env_pokes(
-    box_pokemon_repository: &dyn BoxPokemonRepositoryTrait,
+    box_pokemon_repository: &mut dyn BoxPokemonRepositoryTrait,
     env_pokemon_repository: &mut dyn EnvPokemonRepositoryTrait,
 ) {
+    box_pokemon_repository.load().await;
     let box_pokemons: &Vec<PokemonIndividual> = box_pokemon_repository.get_all();
 
     env_pokemon_repository.load().await;
