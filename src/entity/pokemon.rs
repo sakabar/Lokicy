@@ -451,3 +451,40 @@ impl Move {
         &self.name
     }
 }
+
+pub fn base_stats_to_stats_hp(
+    base_stats: i32,
+    individual_value: i32,
+    effort_value: i32,
+    level: i32,
+) -> i32 {
+    let x: i32 = (base_stats * 2 + individual_value + (effort_value / 4)) * level / 100;
+    x + 10 + level
+}
+
+#[test]
+fn it_works_for_base_stats_to_stats_hp() {
+    // ハピナスのHP特化(Lv.50)
+    let actual = base_stats_to_stats_hp(255, 31, 252, 50, 1.1);
+    let expected = 362;
+    assert_eq!(actual, expected);
+}
+
+pub fn base_stats_to_stats(
+    base_stats: i32,
+    individual_value: i32,
+    effort_value: i32,
+    level: i32,
+    natural: f32,
+) -> i32 {
+    let x = (base_stats * 2 + individual_value + (effort_value / 4)) * level / 100;
+    ((x as f32 + 5.0) * natural).floor() as i32
+}
+
+#[test]
+fn it_works_for_base_stats_to_stats() {
+    // サンダースの素早さ特化(Lv.50)
+    let actual = base_stats_to_stats(130, 31, 252, 50, 1.1);
+    let expected = 200;
+    assert_eq!(actual, expected);
+}
