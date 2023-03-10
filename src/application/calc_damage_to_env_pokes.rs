@@ -55,7 +55,7 @@ pub async fn calc_damage_to_env_pokes(
     }
 
     answers.sort();
-    for (damage, name, boxs) in answers.iter() {
-        println!("{}\t{}\t{:?}", damage, name, boxs[0]);
+    for (damage, name, box_pokemons) in answers.iter() {
+        println!("{}\t{}\t{:?}", damage, name, box_pokemons);
     }
 }

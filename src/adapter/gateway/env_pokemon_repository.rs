@@ -37,8 +37,6 @@ impl EnvPokemonRepositoryTrait for EnvPokemonRepository {
 
     async fn load(&mut self) {
         let env_pokemons: Vec<(i64, Vec<(Be, f64)>)> = vec![
-            // カイリュー
-            (149, vec![(Be::Normal, 0.566), (Be::Flying, 0.298)]),
             // ハバタクカミ
             (
                 987,
@@ -49,6 +47,8 @@ impl EnvPokemonRepositoryTrait for EnvPokemonRepository {
                     (Be::Ghost, 0.116),
                 ],
             ),
+            // カイリュー
+            (149, vec![(Be::Normal, 0.566), (Be::Flying, 0.298)]),
             // サーフゴー
             (
                 1000,
@@ -64,21 +64,6 @@ impl EnvPokemonRepositoryTrait for EnvPokemonRepository {
                 998,
                 vec![(Be::Ground, 0.595), (Be::Electric, 0.177), (Be::Ice, 0.083)],
             ),
-            // テツノツツミ
-            (
-                991,
-                vec![
-                    (Be::Water, 0.401),
-                    (Be::Ice, 0.310),
-                    (Be::Ghost, 0.081),
-                    (Be::Ground, 0.077),
-                ],
-            ),
-            // ドドゲザン
-            (
-                983,
-                vec![(Be::Dark, 0.621), (Be::Flying, 0.161), (Be::Fairy, 0.106)],
-            ),
             // テツノドクガ
             (
                 994,
@@ -90,6 +75,21 @@ impl EnvPokemonRepositoryTrait for EnvPokemonRepository {
                     (Be::Fairy, 0.067),
                 ],
             ),
+            // ドドゲザン
+            (
+                983,
+                vec![(Be::Dark, 0.621), (Be::Flying, 0.161), (Be::Fairy, 0.106)],
+            ),
+            // テツノツツミ
+            (
+                991,
+                vec![
+                    (Be::Water, 0.401),
+                    (Be::Ice, 0.310),
+                    (Be::Ghost, 0.081),
+                    (Be::Ground, 0.077),
+                ],
+            ),
             // ミミッキュ
             (
                 778,
@@ -98,37 +98,6 @@ impl EnvPokemonRepositoryTrait for EnvPokemonRepository {
                     (Be::Fairy, 0.262),
                     (Be::Fighting, 0.169),
                     (Be::Normal, 0.080),
-                ],
-            ),
-            // トドロクツキ
-            (
-                1005,
-                vec![
-                    (Be::Flying, 0.513),
-                    (Be::Steel, 0.216),
-                    (Be::Fire, 0.076),
-                    (Be::Poison, 0.057),
-                ],
-            ),
-            // テツノブジン
-            (
-                1006,
-                vec![
-                    (Be::Ghost, 0.313),
-                    (Be::Fairy, 0.210),
-                    (Be::Steel, 0.177),
-                    (Be::Fighting, 0.156),
-                ],
-            ),
-            // ラウドボーン
-            (
-                911,
-                vec![
-                    (Be::Fairy, 0.356),
-                    (Be::Normal, 0.260),
-                    (Be::Fire, 0.178),
-                    (Be::Water, 0.096),
-                    (Be::Grass, 0.045),
                 ],
             ),
             // ヘイラッシャ
@@ -142,9 +111,7 @@ impl EnvPokemonRepositoryTrait for EnvPokemonRepository {
                     (Be::Steel, 0.052),
                 ],
             ),
-            // ハッサム
-            (212, vec![(Be::Steel, 0.631), (Be::Water, 0.166)]),
-            // ミトム
+            // 水ロトム
             (
                 0479,
                 vec![
@@ -152,6 +119,39 @@ impl EnvPokemonRepositoryTrait for EnvPokemonRepository {
                     (Be::Steel, 0.203),
                     (Be::Electric, 0.140),
                     (Be::Ghost, 0.075),
+                ],
+            ),
+            // テツノブジン
+            (
+                1006,
+                vec![
+                    (Be::Ghost, 0.313),
+                    (Be::Fairy, 0.210),
+                    (Be::Steel, 0.177),
+                    (Be::Fighting, 0.156),
+                ],
+            ),
+            // ハッサム
+            (212, vec![(Be::Steel, 0.631), (Be::Water, 0.166)]),
+            // トドロクツキ
+            (
+                1005,
+                vec![
+                    (Be::Flying, 0.513),
+                    (Be::Steel, 0.216),
+                    (Be::Fire, 0.076),
+                    (Be::Poison, 0.057),
+                ],
+            ),
+            // ラウドボーン
+            (
+                911,
+                vec![
+                    (Be::Fairy, 0.356),
+                    (Be::Normal, 0.260),
+                    (Be::Fire, 0.178),
+                    (Be::Water, 0.096),
+                    (Be::Grass, 0.045),
                 ],
             ),
             // キョジオーン
@@ -192,17 +192,6 @@ impl EnvPokemonRepositoryTrait for EnvPokemonRepository {
                 908,
                 vec![(Be::Grass, 0.679), (Be::Dark, 0.130), (Be::Fire, 0.042)],
             ),
-            // テツノカイナ
-            (
-                992,
-                vec![
-                    (Be::Ground, 0.217),
-                    (Be::Flying, 0.205),
-                    (Be::Electric, 0.205),
-                    (Be::Fighting, 0.170),
-                    (Be::Fairy, 0.068),
-                ],
-            ),
             // コノヨザル
             (
                 979,
@@ -214,6 +203,18 @@ impl EnvPokemonRepositoryTrait for EnvPokemonRepository {
                     (Be::Fighting, 0.059),
                 ],
             ),
+            // テツノカイナ
+            (
+                992,
+                vec![
+                    (Be::Ground, 0.217),
+                    (Be::Flying, 0.205),
+                    (Be::Electric, 0.205),
+                    (Be::Fighting, 0.170),
+                    (Be::Fairy, 0.068),
+                ],
+            ),
+            // アーマーガア
             // (, vec![
             //     (Be::,0.),
             //     (Be::,0.),
@@ -221,13 +222,16 @@ impl EnvPokemonRepositoryTrait for EnvPokemonRepository {
             //     (Be::,0.),
             // ]),
 
-            // (, vec![
-            //     (Be::,0.),
-            //     (Be::,0.),
-            //     (Be::,0.),
-            //     (Be::,0.),
-            // ]),
-
+            // 何位? ソウブレイズ
+            (
+                937,
+                vec![
+                    (Be::Bug, 1.0),
+                    // (Be::,0.),
+                    // (Be::,0.),
+                    // (Be::,0.),
+                ],
+            ),
             // (, vec![
             //     (Be::,0.),
             //     (Be::,0.),
