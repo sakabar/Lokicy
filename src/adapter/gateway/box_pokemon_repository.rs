@@ -24,8 +24,8 @@ pub struct BoxPokemonRepository {
 impl BoxPokemonRepository {
     pub fn new() -> Self {
         Self {
-            data: vec![],
-            // data: get_initial_data(),
+            // data: vec![],
+            data: get_initial_data(),
             rustemon_client: rustemon::client::RustemonClient::default(),
         }
     }
@@ -48,15 +48,15 @@ impl BoxPokemonRepositoryTrait for BoxPokemonRepository {
             //     vec!["overheat", "bug-buzz"],
             //     "ウルガモス",
             // ),
-            // (
-            //     130,
-            //     Be::Water,
-            //     None,
-            //     (252, 252, 4, 0, 0, 0),
-            //     (1.1, 1.0, 0.9, 1.0, 1.0),
-            //     vec!["aqua-tail", "earthquake", "avalanche", "fire-blast"],
-            //     "ギャラドス",
-            // ),
+            (
+                130,
+                Be::Water,
+                None,
+                (252, 252, 4, 0, 0, 0),
+                (1.1, 1.0, 0.9, 1.0, 1.0),
+                vec!["aqua-tail", "earthquake", "avalanche", "fire-blast"],
+                "ギャラドス",
+            ),
             // (
             //     713,
             //     Be::Ice,
@@ -128,15 +128,15 @@ impl BoxPokemonRepositoryTrait for BoxPokemonRepository {
             //     ],
             //     "ケンタロス(水)".to_string(),
             // ),
-            (
-                1000,
-                Be::Ghost,
-                None,
-                (252, 0, 4, 252, 0, 0),
-                (0.9, 1.0, 1.1, 1.0, 1.0),
-                vec!["make-it-rain", "shadow-ball", "focus-blast"],
-                "サーフゴー",
-            ),
+            // (
+            //     1000,
+            //     Be::Ghost,
+            //     None,
+            //     (252, 0, 4, 252, 0, 0),
+            //     (0.9, 1.0, 1.1, 1.0, 1.0),
+            //     vec!["make-it-rain", "shadow-ball", "focus-blast"],
+            //     "サーフゴー",
+            // ),
             // (
             //     635,
             //     Be::Steel,
@@ -166,15 +166,15 @@ impl BoxPokemonRepositoryTrait for BoxPokemonRepository {
             // ),
             // Todo: ドータクン
             // ドオー
-            (
-                980,
-                Be::Poison,
-                Some(Ae::WaterAbsorb),
-                (108, 252, 148, 0, 0, 0),
-                (1.1, 1.0, 0.9, 1.0, 1.0),
-                vec!["gunk-shot", "earthquake", "stone-edge", "megahorn"],
-                "ドオー",
-            ),
+            // (
+            //     980,
+            //     Be::Poison,
+            //     Some(Ae::WaterAbsorb),
+            //     (108, 252, 148, 0, 0, 0),
+            //     (1.1, 1.0, 0.9, 1.0, 1.0),
+            //     vec!["gunk-shot", "earthquake", "stone-edge", "megahorn"],
+            //     "ドオー",
+            // ),
             // Todo: ドドゲザン
             // Todo: トリトドン
             // Todo: ハリテヤマ
@@ -214,7 +214,7 @@ impl BoxPokemonRepositoryTrait for BoxPokemonRepository {
                 None,
                 (252, 252, 4, 0, 0, 0),
                 (1.1, 1.0, 0.9, 1.0, 1.0),
-                vec!["close-combat", "headlong-rush"],
+                vec!["close-combat", "headlong-rush", "stone-edge", "knock-off"],
                 "イダイナキバ",
             ),
             // (
@@ -446,36 +446,36 @@ fn get_initial_data() -> Vec<PokemonIndividual> {
             ],
             "ケンタロス(炎)".to_string(),
         ),
-        PokemonIndividual::new(
-            PokemonSpecies::new_by_number_elements(128, Mbe(Be::Fighting), Mbe(Be::Water), Mnone),
-            Be::Fighting,
-            false,
-            182,
-            178,
-            126,
-            45,
-            90,
-            120,
-            vec![
-                Move::new(
-                    "インファイト",
-                    Be::Fighting,
-                    MoveType::Physical,
-                    120,
-                    1.0,
-                    10,
-                ),
-                Move::new(
-                    "ウェーブタックル",
-                    Be::Water,
-                    MoveType::Physical,
-                    120,
-                    1.0,
-                    10,
-                ),
-            ],
-            "ケンタロス(水)".to_string(),
-        ),
+        // PokemonIndividual::new(
+        //     PokemonSpecies::new_by_number_elements(128, Mbe(Be::Fighting), Mbe(Be::Water), Mnone),
+        //     Be::Fighting,
+        //     false,
+        //     182,
+        //     178,
+        //     126,
+        //     45,
+        //     90,
+        //     120,
+        //     vec![
+        //         Move::new(
+        //             "インファイト",
+        //             Be::Fighting,
+        //             MoveType::Physical,
+        //             120,
+        //             1.0,
+        //             10,
+        //         ),
+        //         Move::new(
+        //             "ウェーブタックル",
+        //             Be::Water,
+        //             MoveType::Physical,
+        //             120,
+        //             1.0,
+        //             10,
+        //         ),
+        //     ],
+        //     "ケンタロス(水)".to_string(),
+        // ),
         // PokemonIndividual::new(
         //     PokemonSpecies::new_by_number_elements(1000, Mbe(Be::Steel), Mbe(Be::Ghost), Mnone),
         //     Be::Ghost,
